@@ -5,53 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Korea 2026</title>
+
   <meta
     name="description"
-    content="Notre voyage en Corée du Sud — Seoul, Gyeongju, Busan, Seoul."
+    content="Notre voyage en Corée du Sud — Séoul, Gyeongju, Busan, Séoul."
   >
 
-  <!-- IMPORTANT : les fichiers sont à la racine du repository -->
   <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-  <!-- =========================
-       HEADER / NAVIGATION
-  ========================== -->
+  <!-- HEADER -->
   <header class="site-header">
-    <nav class="main-nav">
+    <a href="#home" class="brand">
+      <span>KOREA</span>
+      <b>2026</b>
+    </a>
 
-      <a href="#home" class="brand">
-        <span>KOREA</span>
-        <strong>2026</strong>
-      </a>
-
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#planning">Planning</a>
-        <a href="#vote">À voter</a>
-        <a href="#map">Carte</a>
-        <a href="#seoul">Séoul</a>
-        <a href="#gyeongju">Gyeongju</a>
-        <a href="#busan">Busan</a>
-        <a href="#infos">Infos</a>
-      </div>
-
-      <button class="menu-toggle" aria-label="Ouvrir le menu">
-        ☰
-      </button>
-
+    <nav class="nav">
+      <a href="#home">Home</a>
+      <a href="#planning">Planning</a>
+      <a href="#vote">À voter</a>
+      <a href="#map">Carte</a>
+      <a href="#seoul">Séoul</a>
+      <a href="#gyeongju">Gyeongju</a>
+      <a href="#busan">Busan</a>
+      <a href="#infos">Infos</a>
     </nav>
+
+    <button class="nav-toggle" aria-label="Ouvrir le menu">
+      ☰
+    </button>
   </header>
 
 
-  <!-- =========================
-       HERO
-  ========================== -->
-  <main>
+  <main id="home">
 
-    <section id="home" class="hero">
+    <!-- HERO -->
+    <section class="section hero">
 
       <div class="hero-content">
 
@@ -63,123 +55,152 @@
           Seoul → Gyeongju → Busan → Seoul
         </h1>
 
-        <p class="hero-description">
+        <p class="hero-lead">
           Un voyage à deux, pensé pour alterner grandes villes,
           histoire, food, balades et moments tranquilles.
         </p>
 
         <div class="hero-actions">
-          <a href="#planning" class="button button-primary">
+
+          <a href="#planning" class="btn btn-primary">
             Voir le voyage
           </a>
 
-          <a href="#vote" class="button button-secondary">
-            Nos choix <span id="vote-count">0</span>
+          <a href="#vote" class="btn btn-ghost">
+            Nos choix
+            <span id="voteBadge">0</span>
           </a>
+
         </div>
 
       </div>
 
+      <div class="hero-photo"></div>
+
     </section>
 
 
-    <!-- =========================
-         ROUTE
-    ========================== -->
-    <section class="section route-section">
+    <!-- PARCOURS -->
+    <section class="section">
 
       <div class="section-heading">
-        <p class="eyebrow">LE PARCOURS</p>
-        <h2>4 étapes, un seul fil rouge.</h2>
+
+        <div>
+          <p class="eyebrow">LE PARCOURS</p>
+          <h2>4 étapes, un seul fil rouge.</h2>
+        </div>
+
         <p>
           Découvrir sans courir. Chaque étape rassemble
           les informations utiles au même endroit.
         </p>
+
       </div>
 
-      <div id="route-container" class="route-grid"></div>
+      <div id="routeCards" class="route-grid"></div>
 
     </section>
 
 
-    <!-- =========================
-         PLANNING
-    ========================== -->
-    <section id="planning" class="section">
+    <!-- PLANNING -->
+    <section id="planning" class="tinted">
 
-      <div class="section-heading">
-        <p class="eyebrow">PLANNING</p>
-        <h2>Le voyage, jour après jour.</h2>
+      <div class="section">
+
+        <div class="section-heading">
+
+          <div>
+            <p class="eyebrow">PLANNING</p>
+            <h2>Le voyage, jour après jour.</h2>
+          </div>
+
+        </div>
+
+        <div id="dayFilters" class="filters"></div>
+
+        <div id="timeline" class="timeline"></div>
+
       </div>
-
-      <div id="planning-container"></div>
 
     </section>
 
 
-    <!-- =========================
-         VOTE
-    ========================== -->
-    <section id="vote" class="section section-soft">
+    <!-- VOTES -->
+    <section id="vote" class="section">
 
       <div class="section-heading">
-        <p class="eyebrow">À VOTER</p>
 
-        <h2>
-          Les décisions qu’on peut prendre ensemble.
-        </h2>
+        <div>
+          <p class="eyebrow">À VOTER</p>
+
+          <h2>
+            Les décisions qu’on peut prendre ensemble.
+          </h2>
+        </div>
 
         <p>
           Choisis une option. Ton choix reste enregistré
           sur cet appareil et peut être modifié.
         </p>
+
       </div>
 
-      <div id="vote-container"></div>
+      <div id="voteList" class="vote-grid"></div>
 
     </section>
 
 
-    <!-- =========================
-         CARTE
-    ========================== -->
+    <!-- CARTE -->
     <section id="map" class="section">
 
       <div class="section-heading">
-        <p class="eyebrow">CARTE</p>
-        <h2>Les grandes étapes.</h2>
+
+        <div>
+          <p class="eyebrow">CARTE</p>
+          <h2>Les grandes étapes.</h2>
+        </div>
+
       </div>
 
-      <div class="trip-map">
+      <div class="map-card">
 
-        <div class="map-step">
-          <span>01</span>
-          <strong>SEOUL</strong>
-          <small>23–27 OCT</small>
+        <div class="map-line">
+
+          <div class="map-dot active">01</div>
+          <i></i>
+
+          <div class="map-dot">02</div>
+          <i></i>
+
+          <div class="map-dot">03</div>
+          <i></i>
+
+          <div class="map-dot">04</div>
+
         </div>
 
-        <div class="map-line"></div>
+        <div class="map-labels">
 
-        <div class="map-step">
-          <span>02</span>
-          <strong>GYEONGJU</strong>
-          <small>27–29 OCT</small>
-        </div>
+          <div>
+            SEOUL
+            <small>23–27 OCT</small>
+          </div>
 
-        <div class="map-line"></div>
+          <div>
+            GYEONGJU
+            <small>27–29 OCT</small>
+          </div>
 
-        <div class="map-step">
-          <span>03</span>
-          <strong>BUSAN</strong>
-          <small>29 OCT–1 NOV</small>
-        </div>
+          <div>
+            BUSAN
+            <small>29 OCT–1 NOV</small>
+          </div>
 
-        <div class="map-line"></div>
+          <div>
+            SEOUL
+            <small>1–4 NOV</small>
+          </div>
 
-        <div class="map-step">
-          <span>04</span>
-          <strong>SEOUL</strong>
-          <small>1–4 NOV</small>
         </div>
 
       </div>
@@ -187,107 +208,133 @@
     </section>
 
 
-    <!-- =========================
-         SEOUL
-    ========================== -->
-    <section id="seoul" class="destination-section">
+    <!-- SEOUL -->
+    <section id="seoul" class="section">
 
-      <div class="destination-content">
+      <div class="destination">
 
-        <p class="eyebrow">01 · SEOUL</p>
+        <div
+          class="destination-image seoul-image"
+          aria-label="Séoul"
+        ></div>
 
-        <h2>
-          La ville comme point de départ.
-        </h2>
+        <div class="destination-copy">
 
-        <p>
-          Premiers pas, quartiers, cafés, marchés et temps
-          en famille. Le 25 octobre est réservé pour
-          l’anniversaire de Papa.
-        </p>
+          <p class="eyebrow">
+            01 · SEOUL
+          </p>
 
-        <a href="#planning" class="text-link">
-          Voir le planning →
-        </a>
+          <h2>
+            La ville comme point de départ.
+          </h2>
 
-      </div>
+          <p>
+            Premiers pas, quartiers, cafés, marchés et temps
+            en famille. Le 25 octobre est réservé pour
+            l’anniversaire de Papa.
+          </p>
 
-    </section>
+          <a href="#planning" class="text-link">
+            Voir le planning →
+          </a>
 
-
-    <!-- =========================
-         GYEONGJU
-    ========================== -->
-    <section id="gyeongju" class="destination-section destination-alt">
-
-      <div class="destination-content">
-
-        <p class="eyebrow">02 · GYEONGJU</p>
-
-        <h2>
-          Histoire, vélos & grand parc.
-        </h2>
-
-        <p>
-          Une étape plus lente pour découvrir l’ancienne
-          capitale de Silla, notamment à vélo autour
-          des grands espaces historiques.
-        </p>
-
-        <a href="#vote" class="text-link">
-          Choisir nos activités →
-        </a>
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- =========================
-         BUSAN
-    ========================== -->
-    <section id="busan" class="destination-section">
+    <!-- GYEONGJU -->
+    <section id="gyeongju" class="section">
 
-      <div class="destination-content">
+      <div class="destination reverse">
 
-        <p class="eyebrow">03 · BUSAN</p>
+        <div
+          class="destination-image gyeongju-image"
+          aria-label="Gyeongju"
+        ></div>
 
-        <h2>
-          Mer, food & énergie.
-        </h2>
+        <div class="destination-copy">
 
-        <p>
-          Une parenthèse côtière avant le retour à Séoul,
-          avec de la place pour improviser selon la météo.
-        </p>
+          <p class="eyebrow">
+            02 · GYEONGJU
+          </p>
 
-        <a href="#map" class="text-link">
-          Voir le parcours →
-        </a>
+          <h2>
+            Histoire, vélos & grand parc.
+          </h2>
+
+          <p>
+            Une étape plus lente pour découvrir l’ancienne
+            capitale de Silla, notamment à vélo autour
+            des grands espaces historiques.
+          </p>
+
+          <a href="#vote" class="text-link">
+            Choisir nos activités →
+          </a>
+
+        </div>
 
       </div>
 
     </section>
 
 
-    <!-- =========================
-         INFOS
-    ========================== -->
+    <!-- BUSAN -->
+    <section id="busan" class="section">
+
+      <div class="destination">
+
+        <div
+          class="destination-image busan-image"
+          aria-label="Busan"
+        ></div>
+
+        <div class="destination-copy">
+
+          <p class="eyebrow">
+            03 · BUSAN
+          </p>
+
+          <h2>
+            Mer, food & énergie.
+          </h2>
+
+          <p>
+            Une parenthèse côtière avant le retour à Séoul,
+            avec de la place pour improviser selon la météo.
+          </p>
+
+          <a href="#map" class="text-link">
+            Voir le parcours →
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- INFOS -->
     <section id="infos" class="section">
 
       <div class="section-heading">
 
-        <p class="eyebrow">INFOS</p>
-
-        <h2>Les essentiels.</h2>
+        <div>
+          <p class="eyebrow">INFOS</p>
+          <h2>Les essentiels.</h2>
+        </div>
 
       </div>
 
       <div class="info-grid">
 
-        <article class="info-card">
+        <article>
 
-          <div class="info-icon">✈</div>
+          <span>✈</span>
 
           <h3>Vols</h3>
 
@@ -299,9 +346,9 @@
         </article>
 
 
-        <article class="info-card">
+        <article>
 
-          <div class="info-icon">🏨</div>
+          <span>🏨</span>
 
           <h3>Hébergement</h3>
 
@@ -313,9 +360,9 @@
         </article>
 
 
-        <article class="info-card">
+        <article>
 
-          <div class="info-icon">💳</div>
+          <span>💳</span>
 
           <h3>À préparer</h3>
 
@@ -327,9 +374,9 @@
         </article>
 
 
-        <article class="info-card">
+        <article>
 
-          <div class="info-icon">💍</div>
+          <span>💍</span>
 
           <h3>31 octobre</h3>
 
@@ -346,22 +393,21 @@
   </main>
 
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
-  <footer class="site-footer">
+  <!-- FOOTER -->
+  <footer class="footer">
 
-    <div class="footer-brand">
-      <strong>KOREA 2026</strong>
-      <span>Seoul → Gyeongju → Busan → Seoul</span>
+    <div>
+      KOREA 2026
+    </div>
+
+    <div>
+      Seoul → Gyeongju → Busan → Seoul
     </div>
 
   </footer>
 
 
-  <!-- =========================
-       MOBILE NAVIGATION
-  ========================== -->
+  <!-- MOBILE NAV -->
   <nav class="mobile-nav">
 
     <a href="#home">
@@ -387,7 +433,7 @@
   </nav>
 
 
-  <!-- IMPORTANT : les fichiers JS sont à la racine -->
+  <!-- JAVASCRIPT -->
   <script src="data.js"></script>
   <script src="app.js"></script>
 
