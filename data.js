@@ -19,10 +19,4 @@ window.KOREA_DATA = {
     {date:"3 NOV",place:"Séoul",title:"Dernière journée",text:"Derniers repas et préparation du retour."},
     {date:"4 NOV",place:"Séoul",title:"Retour",text:"Départ vers ICN et retour."}
   ],
-  votes: [
-    {id:"gyeongju",question:"Quelle activité à Gyeongju ?",options:[["Vélo + parc","Une grande boucle à vélo"],["Sites historiques","Plus de temps dans les sites"],["Mix","Un peu des deux"]]},
-    {id:"seoul-food",question:"Quel type de food tour ?",options:[["Marchés","Street food & marchés"],["Restaurants","Quelques bonnes adresses"],["Spontané","Choisir sur place"]]},
-    {id:"busan-area",question:"Quel quartier privilégier à Busan ?",options:[["Haeundae","Mer, plage et skyline"],["Nampo","Marchés et vieux Busan"],["Mix","Changer de quartier"]]},
-    {id:"seoul-final",question:"Que faire pour la dernière journée ?",options:[["Shopping","Souvenirs et dernières trouvailles"],["Culture","Un dernier musée / quartier"],["Slow","Cafés, balade et repas"]]}
-  ]
 };
