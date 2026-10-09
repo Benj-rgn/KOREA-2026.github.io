@@ -154,11 +154,15 @@ h3 {
   min-height: 650px;
   border-radius: 32px;
   background:
-    linear-gradient(180deg, rgba(65, 41, 32, 0.04), rgba(65, 41, 32, 0.24)),
-    url("https://images.unsplash.com/photo-1538485399081-7c897a2b9b3a?auto=format&fit=crop&w=1200&q=85")
-    center / cover;
+    linear-gradient(
+      180deg,
+      rgba(65, 41, 32, 0.02),
+      rgba(65, 41, 32, 0.12)
+    ),
+    url("hero-couple.jpeg") center 45% / cover no-repeat;
   box-shadow: var(--shadow);
 }
+
 
 .eyebrow {
   color: var(--muted);
@@ -565,7 +569,8 @@ h3 {
   }
 
   .hero-photo {
-    min-height: 480px;
+  min-height: 480px;
+  background-position: center 45%;
   }
 
   .route-grid,
@@ -607,7 +612,8 @@ h3 {
   }
 
   .hero-photo {
-    min-height: 390px;
+  min-height: 390px;
+  background-position: center 45%;
   }
 
   .route-grid,
