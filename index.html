@@ -4,12 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Korea 2026</title>
+  <title>Korea 2026 — Notre voyage en Corée du Sud</title>
 
   <meta
     name="description"
-    content="Notre voyage en Corée du Sud — Séoul, Gyeongju, Busan, Séoul."
+    content="Notre voyage en Corée du Sud du 24 octobre au 4 novembre 2026 : Séoul, Busan et Gyeongju."
   >
+
+  <meta name="theme-color" content="#F5F1EA">
 
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -18,58 +20,51 @@
 
   <!-- HEADER -->
   <header class="site-header">
-    <a href="#home" class="brand">
+    <a href="#home" class="brand" aria-label="Korea 2026 — Accueil">
       <span>KOREA</span>
       <b>2026</b>
     </a>
 
-    <nav class="nav">
+    <nav class="nav" aria-label="Navigation principale">
       <a href="#home">Home</a>
       <a href="#planning">Planning</a>
       <a href="#map">Carte</a>
       <a href="#seoul">Séoul</a>
-      <a href="#gyeongju">Gyeongju</a>
       <a href="#busan">Busan</a>
+      <a href="#gyeongju">Gyeongju</a>
       <a href="#infos">Infos</a>
     </nav>
-
   </header>
 
 
   <main id="home">
 
     <!-- HERO -->
-    <section class="section hero">
+    <section class="section hero" aria-labelledby="hero-title">
 
-      <div class="hero-content">
+      <div class="hero-photo">
+        <div class="hero-overlay">
+          <p class="eyebrow">
+            24 OCT — 4 NOV 2026 · SOUTH KOREA
+          </p>
 
-        <p class="eyebrow">
-          23 OCT — 4 NOV 2026 · SOUTH KOREA
-        </p>
-
-        <h1>9000km away…</h1>
-
-        <p class="hero-lead">
-          Un voyage pensé pour alterner grandes villes,
-          histoire, super restaurant, balades et moments de détente.
-        </p>
+          <h1 id="hero-title">9000km away…</h1>
+        </div>
+      </div>
 
       <div class="hero-actions">
-      <a class="btn btn-primary" href="#planning">Voir le voyage</a>
+        <a class="btn btn-primary" href="#planning">
+          Voir le voyage
+        </a>
       </div>
-
-      </div>
-
-      <div class="hero-photo"></div>
 
     </section>
 
 
     <!-- PARCOURS -->
-    <section class="section">
+    <section class="section" id="parcours">
 
       <div class="section-heading">
-
         <div>
           <p class="eyebrow">LE PARCOURS</p>
           <h2>4 étapes, un seul fil rouge.</h2>
@@ -79,7 +74,6 @@
           Découvrir sans courir. Chaque étape rassemble
           les informations utiles au même endroit.
         </p>
-
       </div>
 
       <div id="routeCards" class="route-grid"></div>
@@ -93,74 +87,64 @@
       <div class="section">
 
         <div class="section-heading">
-
           <div>
             <p class="eyebrow">PLANNING</p>
             <h2>Le voyage, jour après jour.</h2>
           </div>
-
         </div>
 
-        <div id="dayFilters" class="filters"></div>
+        <div id="dayFilters" class="filters"
+             aria-label="Filtrer le planning par destination"></div>
 
-        <div id="timeline" class="timeline"></div>
+        <div id="timeline" class="timeline" aria-live="polite"></div>
 
       </div>
 
     </section>
 
 
-    <!-- CARTE -->
+    <!-- CARTE DU PARCOURS -->
     <section id="map" class="section">
 
       <div class="section-heading">
-
         <div>
           <p class="eyebrow">CARTE</p>
           <h2>Les grandes étapes.</h2>
         </div>
-
       </div>
 
       <div class="map-card">
 
-        <div class="map-line">
-
+        <div class="map-line" aria-hidden="true">
           <div class="map-dot active">01</div>
           <i></i>
-
           <div class="map-dot">02</div>
           <i></i>
-
           <div class="map-dot">03</div>
           <i></i>
-
           <div class="map-dot">04</div>
-
         </div>
 
         <div class="map-labels">
-
           <div>
-            SEOUL
-            <small>23–27 OCT</small>
-          </div>
-
-          <div>
-            GYEONGJU
-            <small>27–29 OCT</small>
+            SÉOUL
+            <small>24–26 OCT</small>
           </div>
 
           <div>
             BUSAN
-            <small>29 OCT–1 NOV</small>
+            <small>26–28 OCT</small>
           </div>
 
           <div>
-            SEOUL
-            <small>1–4 NOV</small>
+            GYEONGJU
+            <small>28–30 OCT</small>
           </div>
 
+          <div>
+            SÉOUL
+            <small>30 OCT–4 NOV</small>
+          </div>
         </div>
 
       </div>
@@ -175,66 +159,25 @@
 
         <div
           class="destination-image seoul-image"
-          aria-label="Séoul"
+          role="img"
+          aria-label="Vue de Séoul en Corée du Sud"
         ></div>
 
         <div class="destination-copy">
+          <p class="eyebrow">01 & 04 · SÉOUL</p>
 
-          <p class="eyebrow">
-            01 · SEOUL
-          </p>
-
-          <h2>
-            La ville comme point de départ.
-          </h2>
+          <h2>La ville comme point de départ.</h2>
 
           <p>
             Premiers pas, quartiers, cafés, marchés et temps
             en famille. Le 25 octobre est réservé pour
-            l’anniversaire de Papa.
+            l’anniversaire de Papa. Nous reviendrons à Séoul
+            le 30 octobre pour le mariage du 31.
           </p>
 
           <a href="#planning" class="text-link">
             Voir le planning →
           </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- GYEONGJU -->
-    <section id="gyeongju" class="section">
-
-      <div class="destination reverse">
-
-        <div
-          class="destination-image gyeongju-image"
-          aria-label="Gyeongju"
-        ></div>
-
-        <div class="destination-copy">
-
-          <p class="eyebrow">
-            02 · GYEONGJU
-          </p>
-
-          <h2>
-            Histoire, vélos & grand parc.
-          </h2>
-
-          <p>
-            Une étape plus lente pour découvrir l’ancienne
-            capitale de Silla, notamment à vélo autour
-            des grands espaces historiques.
-          </p>
-
-          <a href="#vote" class="text-link">
-            Choisir nos activités →
-          </a>
-
         </div>
 
       </div>
@@ -249,28 +192,56 @@
 
         <div
           class="destination-image busan-image"
-          aria-label="Busan"
+          role="img"
+          aria-label="Paysage côtier de Busan"
         ></div>
 
         <div class="destination-copy">
+          <p class="eyebrow">02 · BUSAN</p>
 
-          <p class="eyebrow">
-            03 · BUSAN
-          </p>
-
-          <h2>
-            Mer, food & énergie.
-          </h2>
+          <h2>Mer, food & énergie.</h2>
 
           <p>
-            Une parenthèse côtière avant le retour à Séoul,
-            avec de la place pour improviser selon la météo.
+            Du 26 au 28 octobre, une parenthèse côtière
+            entre paysages maritimes, quartiers vivants
+            et découvertes culinaires.
           </p>
 
-          <a href="#map" class="text-link">
-            Voir le parcours →
+          <a href="#planning" class="text-link">
+            Voir le planning →
           </a>
+        </div>
 
+      </div>
+
+    </section>
+
+
+    <!-- GYEONGJU -->
+    <section id="gyeongju" class="section">
+
+      <div class="destination reverse">
+
+        <div
+          class="destination-image gyeongju-image"
+          role="img"
+          aria-label="Patrimoine historique de Gyeongju"
+        ></div>
+
+        <div class="destination-copy">
+          <p class="eyebrow">03 · GYEONGJU</p>
+
+          <h2>Histoire, vélos & grand parc.</h2>
+
+          <p>
+            Du 28 au 30 octobre, découvrons l'ancienne
+            capitale de Silla, ses sites historiques
+            et ses grands espaces à vélo.
+          </p>
+
+          <a href="#planning" class="text-link">
+            Voir le planning →
+          </a>
         </div>
 
       </div>
@@ -282,68 +253,47 @@
     <section id="infos" class="section">
 
       <div class="section-heading">
-
         <div>
           <p class="eyebrow">INFOS</p>
           <h2>Les essentiels.</h2>
         </div>
-
       </div>
 
       <div class="info-grid">
 
         <article>
-
-          <span>✈</span>
-
+          <span aria-hidden="true">✈</span>
           <h3>Vols</h3>
-
           <p>
             Arrivée à ICN le 24 octobre à 09:30.
             Retour le 4 novembre.
           </p>
-
         </article>
 
-
         <article>
-
-          <span>🏨</span>
-
+          <span aria-hidden="true">🏨</span>
           <h3>Hébergement</h3>
-
           <p>
             À Séoul : Hotel Anteroom Seoul.
             Les autres hébergements sont à confirmer.
           </p>
-
         </article>
 
-
         <article>
-
-          <span>💳</span>
-
+          <span aria-hidden="true">💳</span>
           <h3>À préparer</h3>
-
           <p>
             Transports, réservations, carte bancaire,
             eSIM et quelques réservations clés.
           </p>
-
         </article>
 
-
         <article>
-
-          <span>💍</span>
-
+          <span aria-hidden="true">💍</span>
           <h3>31 octobre</h3>
-
           <p>
-            Journée réservée pour le mariage du frère.
+            Journée réservée pour le mariage de ton frère à Séoul.
           </p>
-
         </article>
 
       </div>
@@ -355,40 +305,33 @@
 
   <!-- FOOTER -->
   <footer class="footer">
-
-    <div>
-      KOREA 2026
-    </div>
-
-    <div>
-      Seoul → Gyeongju → Busan → Seoul
-    </div>
-
+    <div>KOREA 2026</div>
+    <div>Séoul → Busan → Gyeongju → Séoul</div>
   </footer>
 
 
-  <!-- MOBILE NAV -->
-  <nav class="mobile-nav">
+  <!-- NAVIGATION MOBILE -->
+  <nav class="mobile-nav" aria-label="Navigation mobile">
 
     <a href="#home">
-      <span>⌂</span>
+      <span aria-hidden="true">⌂</span>
       <small>Home</small>
     </a>
 
     <a href="#planning">
-      <span>◷</span>
+      <span aria-hidden="true">◷</span>
       <small>Planning</small>
     </a>
 
     <a href="#map">
-      <span>⌖</span>
+      <span aria-hidden="true">⌖</span>
       <small>Carte</small>
     </a>
 
   </nav>
 
 
-  <!-- JAVASCRIPT -->
+  <!-- SCRIPTS -->
   <script src="data.js"></script>
   <script src="app.js"></script>
 
