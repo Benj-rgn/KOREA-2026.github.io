@@ -61,3 +61,110 @@ h3{font-size:1.15rem}
   .section{padding:72px 0}.hero{padding-top:35px}.hero-photo{min-height:390px}.route-grid,.info-grid{grid-template-columns:1fr}
   .map-card{padding:24px 12px}.map-labels{font-size:.62rem}.map-dot{width:34px;height:34px}.footer{flex-direction:column}
 }
+/* KOREA 2026 — V7_V1 ACCESSIBLE PALETTE */
+:root {
+  --main: #1D1D1B;
+  --accent: #D85F43;
+  --secondary: #6F8067;
+  --muted: #4A4A43;
+  --bg: #F5F1EA;
+  --soft: #EEE7DC;
+  --border: #E7E0D6;
+  --white: #FFFDF9;
+  --ink: #1D1D1B;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+h1, h2, h3,
+p, li,
+.hero-lead,
+.section-heading > p,
+.route-card p,
+.day p,
+.destination-copy p:not(.eyebrow),
+.info-grid p {
+  color: var(--ink);
+}
+
+.eyebrow,
+.day-date,
+.day small,
+.route-card .number,
+.map-labels small,
+.footer {
+  color: var(--muted);
+}
+
+.site-header {
+  background: rgba(245, 241, 234, 0.96);
+  border-color: var(--border);
+}
+
+.route-card,
+.vote-card,
+.info-grid article,
+.map-card,
+.day {
+  background: var(--white);
+  border-color: var(--border);
+}
+
+.tinted,
+.filter,
+.vote-btn {
+  background: var(--soft);
+  border-color: var(--border);
+  color: var(--ink);
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--ink);
+}
+
+.btn-primary:hover {
+  background: #C94F35;
+  border-color: #C94F35;
+  color: #FFFFFF;
+}
+
+.btn-ghost {
+  background: var(--white);
+  border-color: var(--border);
+  color: var(--ink);
+}
+
+.filter.active {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--white);
+}
+
+.vote-btn.selected {
+  background: var(--secondary);
+  border-color: var(--secondary);
+  color: #FFFFFF;
+}
+
+.mobile-nav {
+  background: rgba(29, 29, 27, 0.97);
+  border-color: var(--ink);
+}
+
+.mobile-nav a {
+  color: var(--white);
+}
+
+.mobile-nav a:first-child {
+  color: #F08A70;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 3px;
+}
