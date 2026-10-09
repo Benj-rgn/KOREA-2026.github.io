@@ -159,7 +159,7 @@ h3 {
       rgba(65, 41, 32, 0.02),
       rgba(65, 41, 32, 0.12)
     ),
-    url("hero-couple.jpeg") center 45% / cover no-repeat;
+    url("/KOREA-2026.github.io/hero-couple.jpeg") center 45% / cover no-repeat;
   box-shadow: var(--shadow);
 }
 
