@@ -9,12 +9,12 @@ Travel companion website for the Korea 2026 trip.
 - `js/app.js` — interactions, filters and voting
 
 ## Validated V5 design palette
-- Main: `#248591`
-- Accent / CTA: `#FF7420`
-- Secondary: `#8C4218`
-- Background: `#F7F4EB`
-- Soft background: `#E8D8CA`
-- Borders: `#C8AD98`
+- Main: `#412920`
+- Accent / CTA: `#FF6E00`
+- Secondary: `#6F8067`
+- Background: `#F5F1EA`
+- Soft background: `#EEE7DC`
+- Borders: `#E7E0D6`
 - Cards: `#FFFFFF`
 
 Mobile navigation is a fixed bottom navigation, as validated in the design direction.
