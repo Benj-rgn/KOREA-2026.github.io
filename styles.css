@@ -61,19 +61,21 @@ h3{font-size:1.15rem}
   .section{padding:72px 0}.hero{padding-top:35px}.hero-photo{min-height:390px}.route-grid,.info-grid{grid-template-columns:1fr}
   .map-card{padding:24px 12px}.map-labels{font-size:.62rem}.map-dot{width:34px;height:34px}.footer{flex-direction:column}
 }
+```css
 /* KOREA 2026 — V7_V1 ACCESSIBLE PALETTE */
 :root {
-  --main: #1D1D1B;
-  --accent: #D85F43;
+  --main: #412920;
+  --accent: #FF6E00;
   --secondary: #6F8067;
   --muted: #4A4A43;
   --bg: #F5F1EA;
   --soft: #EEE7DC;
   --border: #E7E0D6;
   --white: #FFFDF9;
-  --ink: #1D1D1B;
+  --ink: #412920;
 }
 
+/* Base */
 body {
   background: var(--bg);
   color: var(--ink);
@@ -90,6 +92,7 @@ p, li,
   color: var(--ink);
 }
 
+/* Secondary text */
 .eyebrow,
 .day-date,
 .day small,
@@ -99,11 +102,13 @@ p, li,
   color: var(--muted);
 }
 
+/* Header */
 .site-header {
   background: rgba(245, 241, 234, 0.96);
   border-color: var(--border);
 }
 
+/* Cards and content surfaces */
 .route-card,
 .vote-card,
 .info-grid article,
@@ -113,6 +118,7 @@ p, li,
   border-color: var(--border);
 }
 
+/* Filters and secondary surfaces */
 .tinted,
 .filter,
 .vote-btn {
@@ -121,6 +127,7 @@ p, li,
   color: var(--ink);
 }
 
+/* Primary CTA — dark text on orange for better contrast */
 .btn-primary {
   background: var(--accent);
   border-color: var(--accent);
@@ -128,31 +135,35 @@ p, li,
 }
 
 .btn-primary:hover {
-  background: #C94F35;
-  border-color: #C94F35;
-  color: #FFFFFF;
+  background: #E65F00;
+  border-color: #E65F00;
+  color: var(--ink);
 }
 
+/* Secondary CTA */
 .btn-ghost {
   background: var(--white);
   border-color: var(--border);
   color: var(--ink);
 }
 
+/* Active filter */
 .filter.active {
   background: var(--ink);
   border-color: var(--ink);
   color: var(--white);
 }
 
+/* Selected vote */
 .vote-btn.selected {
   background: var(--secondary);
   border-color: var(--secondary);
   color: #FFFFFF;
 }
 
+/* Mobile navigation */
 .mobile-nav {
-  background: rgba(29, 29, 27, 0.97);
+  background: rgba(65, 41, 32, 0.97);
   border-color: var(--ink);
 }
 
@@ -161,10 +172,21 @@ p, li,
 }
 
 .mobile-nav a:first-child {
-  color: #F08A70;
+  color: var(--accent);
 }
 
+/* Links */
+a {
+  color: var(--ink);
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+/* Keyboard accessibility */
 :focus-visible {
-  outline: 3px solid var(--accent);
+  outline: 3px solid var(--ink);
   outline-offset: 3px;
 }
+```
