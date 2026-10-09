@@ -1,7 +1,5 @@
-
 /* =========================================
-   KOREA 2026 — STYLES
-   Palette V1 adaptée et typographie système
+   KOREA 2026 — DESIGN SYSTEM
    ========================================= */
 
 :root {
@@ -15,18 +13,23 @@
   --white: #FFFDF9;
   --ink: #412920;
   --light-green: #C7D1C1;
+
   --radius: 22px;
   --shadow: 0 14px 40px rgba(65, 41, 32, 0.10);
+  --content-width: 1180px;
 }
 
-/* Base */
+/* =========================================
+   RESET & BASE
+   ========================================= */
+
 * {
   box-sizing: border-box;
 }
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 76px;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -39,12 +42,11 @@ body {
 }
 
 a {
-  color: var(--ink);
+  color: inherit;
   text-decoration: none;
 }
 
 a:hover {
-  color: var(--ink);
   text-decoration: underline;
   text-underline-offset: 3px;
 }
@@ -54,32 +56,49 @@ button {
   color: inherit;
 }
 
+img {
+  max-width: 100%;
+}
+
 h1,
 h2,
 h3 {
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   color: var(--ink);
+  font-family: inherit;
   line-height: 1.12;
 }
 
 h1 {
-  font-size: clamp(3rem, 7vw, 6.8rem);
-  max-width: 900px;
-  margin: 0 0 24px;
-  letter-spacing: -0.045em;
+  margin: 0;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.055em;
+  line-height: 0.98;
 }
 
 h2 {
-  font-size: clamp(2.2rem, 4vw, 4rem);
   margin: 0 0 16px;
-  letter-spacing: -0.035em;
+  font-size: clamp(2.1rem, 4vw, 4rem);
+  letter-spacing: -0.04em;
 }
 
 h3 {
   font-size: 1.15rem;
 }
 
-/* Header */
+p {
+  text-wrap: pretty;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* =========================================
+   HEADER
+   ========================================= */
+
 .site-header {
   position: sticky;
   top: 0;
@@ -88,6 +107,7 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 24px;
   padding: 0 clamp(18px, 4vw, 60px);
   background: rgba(245, 241, 234, 0.96);
   backdrop-filter: blur(14px);
@@ -96,8 +116,9 @@ h3 {
 
 .brand {
   display: flex;
-  gap: 8px;
   align-items: baseline;
+  gap: 8px;
+  flex-shrink: 0;
   font-weight: 800;
   letter-spacing: 0.08em;
 }
@@ -113,15 +134,17 @@ h3 {
 
 .nav {
   display: flex;
-  gap: 20px;
-  font-size: 0.76rem;
+  align-items: center;
+  gap: clamp(10px, 1.6vw, 20px);
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.045em;
 }
 
 .nav a {
   opacity: 0.8;
+  white-space: nowrap;
 }
 
 .nav a:hover {
@@ -129,74 +152,114 @@ h3 {
   color: var(--ink);
 }
 
-.nav-toggle {
-  display: none;
-}
+/* =========================================
+   GENERAL SECTIONS
+   ========================================= */
 
-/* Sections */
 .section {
-  width: min(1180px, calc(100% - 36px));
-  margin: auto;
-  padding: 100px 0;
+  width: min(var(--content-width), calc(100% - 48px));
+  margin-inline: auto;
+  padding: 96px 0;
 }
-
-/* Hero */
-.hero {
-  min-height: calc(100vh - 72px);
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 56px;
-  align-items: center;
-  padding-top: 64px;
-}
-
-.hero-photo {
-  min-height: 650px;
-  border-radius: 32px;
-  background:
-    linear-gradient(
-      180deg,
-      rgba(65, 41, 32, 0.02),
-      rgba(65, 41, 32, 0.12)
-    ),
-    url("/KOREA-2026.github.io/hero-couple.jpeg") center 45% / cover no-repeat;
-  box-shadow: var(--shadow);
-}
-
 
 .eyebrow {
+  margin: 0 0 16px;
   color: var(--muted);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
-.hero-lead {
-  font-size: 1.15rem;
+.section-heading {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 40px;
+  margin-bottom: 36px;
+}
+
+.section-heading > p {
+  max-width: 440px;
+  margin: 0;
   color: var(--muted);
-  max-width: 640px;
+}
+
+/* =========================================
+   HERO
+   ========================================= */
+
+.hero {
+  min-height: auto;
+  display: block;
+  padding-top: 38px;
+  padding-bottom: 72px;
+}
+
+.hero-photo {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(72vh, 760px);
+  overflow: hidden;
+  border-radius: 32px;
+  background-color: var(--soft);
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(35, 23, 18, 0.02) 25%,
+      rgba(35, 23, 18, 0.12) 48%,
+      rgba(35, 23, 18, 0.76) 100%
+    ),
+    url("./hero-couple.jpeg");
+  background-position: center, center 45%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: var(--shadow);
+}
+
+.hero-overlay {
+  width: 100%;
+  padding: clamp(24px, 5vw, 64px);
+  color: var(--white);
+}
+
+.hero-overlay .eyebrow {
+  margin-bottom: 22px;
+  color: var(--white);
+}
+
+.hero-overlay h1 {
+  max-width: 1000px;
+  color: var(--white);
 }
 
 .hero-actions {
   display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 30px;
+  justify-content: center;
+  margin-top: 28px;
 }
 
-/* Buttons */
+/* =========================================
+   BUTTONS
+   ========================================= */
+
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 10px;
-  border-radius: 999px;
-  padding: 13px 19px;
-  font-weight: 800;
+  min-height: 48px;
+  padding: 13px 22px;
   border: 1px solid transparent;
+  border-radius: 999px;
+  font-weight: 800;
   cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .btn:hover {
@@ -216,57 +279,24 @@ h3 {
   color: var(--ink);
 }
 
-.btn-ghost {
-  border-color: var(--border);
-  background: var(--white);
-  color: var(--ink);
-}
+/* =========================================
+   ROUTE CARDS
+   ========================================= */
 
-.btn-ghost:hover {
-  background: var(--soft);
-  color: var(--ink);
-}
-
-#voteBadge {
-  min-width: 21px;
-  height: 21px;
-  border-radius: 50%;
-  display: inline-grid;
-  place-items: center;
-  background: var(--ink);
-  color: var(--white);
-  font-size: 0.7rem;
-}
-
-/* Section headings */
-.section-heading {
-  display: flex;
-  justify-content: space-between;
-  align-items: end;
-  gap: 40px;
-  margin-bottom: 38px;
-}
-
-.section-heading > p {
-  max-width: 440px;
-  color: var(--muted);
-}
-
-/* Route cards and information cards */
 .route-grid,
 .info-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 16px;
 }
 
 .route-card,
-.vote-card,
 .info-grid article {
+  min-width: 0;
+  padding: 24px;
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 24px;
   box-shadow: 0 8px 24px rgba(65, 41, 32, 0.04);
 }
 
@@ -275,48 +305,68 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.route-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  text-decoration: none;
 }
 
 .route-card .number {
-  font-size: 0.75rem;
-  color: var(--ink);
+  color: var(--muted);
+  font-size: 0.74rem;
   font-weight: 800;
+  letter-spacing: 0.04em;
 }
 
 .route-card h3 {
-  font-size: 1.55rem;
-  margin: 6px 0;
+  margin: 8px 0;
+  font-size: 1.5rem;
 }
 
 .route-card p,
-.vote-card p,
 .info-grid p {
+  margin-bottom: 0;
   color: var(--muted);
-  font-size: 0.92rem;
+  font-size: 0.9rem;
 }
 
-/* Planning */
+/* =========================================
+   PLANNING
+   ========================================= */
+
 .tinted {
   width: 100%;
-  padding-left: max(18px, calc((100vw - 1180px) / 2));
-  padding-right: max(18px, calc((100vw - 1180px) / 2));
   background: var(--soft);
+}
+
+.tinted > .section {
+  padding-top: 88px;
+  padding-bottom: 88px;
 }
 
 .filters {
   display: flex;
-  gap: 8px;
   flex-wrap: wrap;
-  margin-bottom: 22px;
+  gap: 8px;
+  margin-bottom: 24px;
 }
 
 .filter {
-  border: 1px solid var(--border);
+  min-height: 42px;
+  padding: 9px 16px;
   background: var(--white);
-  color: var(--ink);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 9px 14px;
+  color: var(--ink);
   cursor: pointer;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .filter:hover {
@@ -331,84 +381,48 @@ h3 {
 
 .timeline {
   display: grid;
-  gap: 12px;
+  gap: 0;
 }
 
 .day {
   display: grid;
-  grid-template-columns: 120px 1fr;
-  gap: 18px;
-  padding: 22px 0;
+  grid-template-columns: 120px minmax(0, 1fr);
+  gap: 22px;
+  padding: 24px 0;
   border-top: 1px solid var(--border);
 }
 
 .day-date {
-  font-weight: 800;
   color: var(--ink);
+  font-weight: 800;
+}
+
+.day-date small {
+  display: inline-block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
 }
 
 .day h3 {
-  margin: 0 0 6px;
+  margin: 0 0 8px;
 }
 
 .day p {
-  color: var(--muted);
   margin: 0;
-}
-
-/* Voting */
-.vote-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-}
-
-.vote-card h3 {
-  padding-right: 20px;
-}
-
-.vote-options {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 18px;
-}
-
-.vote-btn {
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--ink);
-  border-radius: 14px;
-  padding: 10px 12px;
-  cursor: pointer;
-  flex: 1;
-  text-align: left;
-}
-
-.vote-btn:hover {
-  border-color: var(--secondary);
-}
-
-.vote-btn.selected {
-  background: var(--light-green);
-  border-color: var(--secondary);
-  color: var(--ink);
-}
-
-.vote-btn strong {
-  display: block;
-}
-
-.vote-btn small {
   color: var(--muted);
 }
 
-/* Schematic route map */
+/* =========================================
+   SCHEMATIC ROUTE MAP
+   ========================================= */
+
 .map-card {
+  padding: 44px;
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: 30px;
-  padding: 45px;
 }
 
 .map-line {
@@ -420,11 +434,12 @@ h3 {
   width: 42px;
   height: 42px;
   flex-shrink: 0;
-  border-radius: 50%;
   display: grid;
   place-items: center;
+  border-radius: 50%;
   background: var(--soft);
   color: var(--ink);
+  font-size: 0.82rem;
   font-weight: 800;
 }
 
@@ -435,31 +450,37 @@ h3 {
 
 .map-line i {
   height: 3px;
-  background: var(--border);
   flex: 1;
+  background: var(--border);
 }
 
 .map-labels {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  margin-top: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 16px;
   text-align: center;
+  font-size: 0.78rem;
   font-weight: 800;
-  font-size: 0.82rem;
 }
 
 .map-labels small {
   display: block;
+  margin-top: 4px;
   color: var(--muted);
+  font-size: 0.72rem;
   font-weight: 500;
 }
 
-/* Destination sections */
+/* =========================================
+   DESTINATION SECTIONS
+   ========================================= */
+
 .destination {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
+  gap: 60px;
 }
 
 .destination.reverse .destination-image {
@@ -467,10 +488,14 @@ h3 {
 }
 
 .destination-image {
+  min-width: 0;
   height: 480px;
+  overflow: hidden;
   border-radius: 30px;
+  background-color: var(--soft);
   background-position: center;
   background-size: cover;
+  background-repeat: no-repeat;
   box-shadow: var(--shadow);
 }
 
@@ -487,8 +512,8 @@ h3 {
 }
 
 .destination-copy p:not(.eyebrow) {
-  color: var(--muted);
   max-width: 520px;
+  color: var(--muted);
 }
 
 .text-link {
@@ -498,144 +523,309 @@ h3 {
   font-weight: 800;
 }
 
-/* Essentials */
+/* =========================================
+   ESSENTIALS
+   ========================================= */
+
 .info-grid article span {
+  display: inline-block;
+  margin-bottom: 8px;
   font-size: 1.6rem;
+}
+
+.info-grid h3 {
+  margin: 8px 0;
 }
 
 .footer {
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  padding: 28px max(18px, calc((100vw - 1180px) / 2));
+  padding: 28px max(24px, calc((100vw - var(--content-width)) / 2));
   border-top: 1px solid var(--border);
-  font-size: 0.78rem;
   color: var(--muted);
+  font-size: 0.78rem;
   font-weight: 700;
 }
 
-/* Keyboard accessibility */
-:focus-visible {
-  outline: 3px solid var(--ink);
-  outline-offset: 3px;
+/* =========================================
+   MOBILE NAVIGATION
+   ========================================= */
+
+.mobile-nav {
+  display: none;
 }
 
-/* Tablet and mobile */
-@media (max-width: 900px) {
+/* =========================================
+   TABLETS
+   ========================================= */
+
+@media (max-width: 1000px) {
+  .site-header {
+    padding-inline: 24px;
+  }
+
   .nav {
-    display: none;
+    gap: 12px;
+    font-size: 0.66rem;
   }
 
-  .mobile-nav {
-    position: fixed;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    left: 14px;
-    right: 14px;
-    bottom: 14px;
-    z-index: 50;
-    background: rgba(65, 41, 32, 0.98);
-    border: 1px solid var(--ink);
-    border-radius: 22px;
-    box-shadow: 0 10px 35px rgba(65, 41, 32, 0.18);
-    padding: 8px;
-  }
-
-  .mobile-nav a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: 8px 4px;
-    font-size: 0.68rem;
-    font-weight: 800;
-    color: var(--white);
-  }
-
-  .mobile-nav a:first-child {
-    color: var(--white);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-  }
-
-  .mobile-nav span {
-    font-size: 1.15rem;
-    line-height: 1;
-  }
-
-  .hero,
-  .destination {
-    grid-template-columns: 1fr;
+  .section {
+    padding-block: 76px;
   }
 
   .hero-photo {
-  min-height: 480px;
-  background-position: center 45%;
+    min-height: 580px;
   }
 
   .route-grid,
   .info-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .vote-grid {
+  .destination {
+    gap: 36px;
+  }
+
+  .destination-image {
+    height: 400px;
+  }
+
+  .map-card {
+    padding: 32px 24px;
+  }
+}
+
+/* =========================================
+   MOBILE
+   ========================================= */
+
+@media (max-width: 760px) {
+  html {
+    scroll-padding-top: 20px;
+  }
+
+  body {
+    padding-bottom: 96px;
+  }
+
+  .site-header {
+    min-height: 64px;
+    padding-inline: 20px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .section {
+    width: calc(100% - 36px);
+    padding-block: 64px;
+  }
+
+  .hero {
+    padding-top: 22px;
+    padding-bottom: 48px;
+  }
+
+  .hero-photo {
+    min-height: 540px;
+    border-radius: 24px;
+    background-position: center, center 45%;
+  }
+
+  .hero-overlay {
+    padding: 28px 22px;
+  }
+
+  .hero-overlay .eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 12vw, 5.5rem);
+  }
+
+  .hero-actions {
+    justify-content: flex-start;
+    margin-top: 22px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 28px;
+  }
+
+  .route-grid,
+  .info-grid {
     grid-template-columns: 1fr;
+  }
+
+  .route-card {
+    min-height: 170px;
+  }
+
+  .tinted > .section {
+    padding-block: 64px;
+  }
+
+  .filters {
+    gap: 8px;
+  }
+
+  .filter {
+    padding-inline: 13px;
+    font-size: 0.88rem;
+  }
+
+  .day {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding-block: 20px;
+  }
+
+  .map-card {
+    padding: 26px 14px;
+    border-radius: 22px;
+  }
+
+  .map-dot {
+    width: 32px;
+    height: 32px;
+    font-size: 0.7rem;
+  }
+
+  .map-labels {
+    gap: 2px;
+    font-size: 0.62rem;
+  }
+
+  .map-labels small {
+    font-size: 0.58rem;
+  }
+
+  .destination {
+    grid-template-columns: 1fr;
+    gap: 24px;
   }
 
   .destination.reverse .destination-image {
     order: 0;
   }
 
-  .section-heading {
-    align-items: start;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .day {
-    grid-template-columns: 90px 1fr;
-  }
-
-  body {
-    padding-bottom: 82px;
-  }
-}
-
-/* Small phones */
-@media (max-width: 560px) {
-  .section {
-    padding: 72px 0;
-  }
-
-  .hero {
-    padding-top: 35px;
-  }
-
-  .hero-photo {
-  min-height: 390px;
-  background-position: center 45%;
-  }
-
-  .route-grid,
-  .info-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .map-card {
-    padding: 24px 12px;
-  }
-
-  .map-labels {
-    font-size: 0.62rem;
-  }
-
-  .map-dot {
-    width: 34px;
-    height: 34px;
-    font-size: 0.75rem;
+  .destination-image {
+    height: 360px;
+    border-radius: 24px;
   }
 
   .footer {
     flex-direction: column;
+    gap: 8px;
+    padding: 24px 20px 30px;
+  }
+
+  .mobile-nav {
+    position: fixed;
+    right: 14px;
+    bottom: 14px;
+    left: 14px;
+    z-index: 50;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: 8px;
+
+    background: rgba(65, 41, 32, 0.98);
+    border: 1px solid rgba(255, 253, 249, 0.12);
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(65, 41, 32, 0.22);
+    backdrop-filter: blur(12px);
+  }
+
+  .mobile-nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px 4px;
+
+    color: var(--white);
+    font-size: 0.68rem;
+    font-weight: 800;
+  }
+
+  .mobile-nav a:hover {
+    text-decoration: none;
+  }
+
+  .mobile-nav a:first-child {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .mobile-nav span {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+}
+
+/* =========================================
+   SMALL PHONES
+   ========================================= */
+
+@media (max-width: 400px) {
+  .section {
+    width: calc(100% - 28px);
+  }
+
+  .hero-photo {
+    min-height: 460px;
+  }
+
+  .hero-overlay {
+    padding: 22px 18px;
+  }
+
+  .hero-overlay .eyebrow {
+    font-size: 0.59rem;
+  }
+
+  .map-card {
+    padding-inline: 8px;
+  }
+
+  .map-dot {
+    width: 27px;
+    height: 27px;
+  }
+
+  .map-labels {
+    font-size: 0.55rem;
+  }
+
+  .map-labels small {
+    font-size: 0.52rem;
+  }
+}
+
+/* =========================================
+   REDUCED MOTION
+   ========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
   }
 }
