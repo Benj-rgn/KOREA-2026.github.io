@@ -1,48 +1,83 @@
-# Korea 2026 — Travel Companion
 
-A personal travel website for our South Korea trip, from **October 24 to November 4, 2026**.
+# Korea 2026 🇰🇷
 
-The website brings together our itinerary, travel route, daily plans, destinations and practical information in one place.
+Carnet de voyage pour notre séjour en Corée du Sud, du 24 octobre au 4 novembre 2026.
 
-## Trip itinerary
+**Site web :** https://benj-rgn.github.io/KOREA-2026.github.io/
 
-| Dates | Destination |
-|---|---|
-| October 24–26 | Seoul |
-| October 26–28 | Busan |
-| October 28–30 | Gyeongju |
-| October 30–November 4 | Seoul |
+## Itinéraire
 
-Key dates:
-- October 25: Father's birthday celebration in Seoul.
-- October 31: Brother's wedding.
-- November 4: Return flight.
+| Dates | Destination | Notes |
+| --- | --- | --- |
+| 24–26 octobre | Séoul | Arrivée à Incheon et événements familiaux |
+| 26–28 octobre | Busan | Côte, gastronomie et paysages |
+| 28–30 octobre | Gyeongju | Patrimoine, nature et vélo |
+| 30 octobre–4 novembre | Séoul | Retour à Séoul et mariage familial le 31 octobre |
 
-## Project structure
+Les horaires de vol, hébergements et activités doivent être vérifiés à partir des réservations définitives.
 
-- `index.html` — Main page structure and content sections.
-- `styles.css` — Visual design, layout and responsive styles.
-- `data.js` — Itinerary data, destinations and daily plans.
-- `app.js` — Dynamic route cards, destination filters and daily itinerary rendering.
-- `hero-couple.jpeg` — Main hero photograph.
+## Structure du projet
 
-## Design system
+```text
+KOREA-2026.github.io/
+├── index.html
+├── styles.css
+├── app.js
+├── data.js
+├── hero-couple.jpeg
+└── README.md
+```
 
-The website uses a warm, minimal visual identity inspired by travel journals.
+### `index.html`
 
-- Main colour: `#412920`
-- Accent colour: `#FF6E00`
-- Secondary colour: `#6F8067`
-- Background: `#F5F1EA`
-- Soft background: `#EEE7DC`
-- Borders: `#E7E0D6`
+Structure de la page : accueil, itinéraire, planning, carte schématique, destinations et informations pratiques.
 
-The layout adapts to desktop, tablet and mobile screens, with a fixed bottom navigation on mobile.
+### `styles.css`
 
-## Deployment
+Style visuel, typographie, couleurs, cartes, mise en page responsive et navigation mobile.
 
-The website is designed to be hosted with GitHub Pages from the `main` branch, using the repository root as the publishing source.
+### `app.js`
 
-Repository: https://github.com/Benj-rgn/KOREA-2026.github.io
+Logique de l'interface : affichage des étapes, filtres du planning, navigation active et rendu des informations dynamiques.
 
-Website: https://benj-rgn.github.io/KOREA-2026.github.io/
+### `data.js`
+
+Données du voyage : dates, étapes, voyageurs, hébergements, événements et préférences.
+
+### `hero-couple.jpeg`
+
+Photo principale utilisée dans la section d'accueil.
+
+## Modifier les informations du voyage
+
+Pour modifier les données, ouvrir `data.js` et mettre à jour l'objet `window.KOREA_DATA`.
+
+Points à vérifier avant le départ :
+
+- [ ] Confirmer les horaires des vols.
+- [ ] Compléter l'hébergement à Busan.
+- [ ] Vérifier les réservations et les transferts entre les villes.
+- [ ] Ajouter les activités confirmées au planning.
+- [ ] Vérifier les informations pratiques et les adresses.
+
+Ne pas considérer une activité comme réservée tant qu'elle n'a pas été confirmée.
+
+## Publication
+
+Le site est hébergé avec GitHub Pages.
+
+Pour publier une modification :
+
+1. Modifier le fichier concerné dans le dépôt GitHub.
+2. Enregistrer les changements avec **Commit changes**.
+3. Attendre la mise à jour de GitHub Pages.
+4. Recharger le site pour vérifier le résultat.
+
+Si les changements n'apparaissent pas immédiatement, essayer un rechargement forcé du navigateur.
+
+## Technologies
+
+- HTML
+- CSS
+- JavaScript natif
+- GitHub Pages
