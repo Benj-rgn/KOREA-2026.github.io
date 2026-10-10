@@ -1151,3 +1151,112 @@ h4 {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Compatibility fixes: JavaScript-rendered components */
+
+.route-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-soft);
+}
+
+.filter {
+  flex-shrink: 0;
+  padding: 10px 16px;
+  border: 1px solid #d8cfc1;
+  border-radius: 999px;
+  color: var(--main);
+  background: transparent;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: 700;
+  transition: color 160ms ease, background 160ms ease, border-color 160ms ease;
+}
+
+.filter:hover,
+.filter.active,
+.filter[aria-pressed="true"] {
+  border-color: var(--main);
+  color: var(--white);
+  background: var(--main);
+}
+
+.day {
+  display: grid;
+  grid-template-columns: 100px minmax(0, 1fr);
+  gap: 22px;
+  min-width: 0;
+  padding: 25px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--white);
+}
+
+.day-date {
+  color: var(--secondary);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.day-date small {
+  display: inline-block;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.day-content {
+  min-width: 0;
+}
+
+.day-fixed {
+  border-color: #dfb99c;
+  background: #fff8f0;
+}
+
+.day-fixed .day-tag {
+  color: #8a4315;
+  background: #f9e4d2;
+}
+
+.trip-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.trip-summary p {
+  min-width: 0;
+  margin: 0;
+  padding: 18px 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: rgba(255, 253, 249, 0.65);
+  overflow-wrap: anywhere;
+  font-size: 12px;
+}
+
+.trip-summary p strong {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--secondary);
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px) {
+  .day {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 20px;
+  }
+
+  .trip-summary {
+    grid-template-columns: 1fr;
+  }
+}
