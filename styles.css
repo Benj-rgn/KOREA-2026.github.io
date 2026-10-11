@@ -1237,3 +1237,214 @@ footer p {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* =========================================================
+   Layout alignment — sections defined in index.html
+   ========================================================= */
+
+.section-heading {
+  width: min(100%, var(--content-width));
+  margin: 0 auto 36px;
+}
+
+.section-heading h2 {
+  margin-bottom: 18px;
+}
+
+.section-heading > p:not(.eyebrow) {
+  max-width: 620px;
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.planning-heading-row {
+  width: min(100%, var(--content-width));
+  margin: 0 auto;
+}
+
+.planning-heading-row .section-heading {
+  margin-bottom: 0;
+}
+
+.planning-heading-row .day-filters {
+  margin-top: 28px;
+}
+
+.today-panel {
+  display: grid;
+  width: min(100%, var(--content-width));
+  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
+  align-items: start;
+  gap: clamp(30px, 6vw, 76px);
+  margin-inline: auto;
+}
+
+.today-content {
+  min-width: 0;
+}
+
+.today-heading h2 {
+  margin-bottom: 12px;
+}
+
+.today-heading .today-date {
+  margin-bottom: 28px;
+}
+
+.destination-section {
+  display: grid;
+  width: 100%;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(32px, 7vw, 90px);
+  padding: clamp(65px, 9vw, 112px) var(--page-gutter);
+  border-top: 1px solid var(--line);
+  background: var(--cream);
+}
+
+.destination-section:nth-of-type(even) {
+  background: var(--paper);
+}
+
+.destination-visual {
+  width: 100%;
+  min-height: 380px;
+  border-radius: var(--radius-large);
+  background-color: var(--paper-dark);
+  background-position: center;
+  background-size: cover;
+}
+
+.destination-visual.destination-seoul {
+  background-image:
+    linear-gradient(0deg, rgb(28 31 25 / 12%), transparent),
+    url("./hero-couple.jpeg");
+}
+
+.destination-visual.destination-busan {
+  background-image:
+    linear-gradient(0deg, rgb(28 31 25 / 15%), transparent),
+    url("https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=1200&q=85");
+}
+
+.destination-visual.destination-gyeongju {
+  background-image:
+    linear-gradient(0deg, rgb(28 31 25 / 15%), transparent),
+    url("https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?auto=format&fit=crop&w=1200&q=85");
+}
+
+.destination-copy {
+  max-width: 520px;
+}
+
+.destination-copy .eyebrow {
+  margin-bottom: 18px;
+}
+
+.destination-copy h2 {
+  margin-bottom: 16px;
+}
+
+.destination-copy .destination-dates {
+  margin-bottom: 20px;
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.destination-copy > p:not(.eyebrow) {
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.destination-copy .text-link {
+  margin-top: 12px;
+}
+
+.destination-reverse .destination-visual {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.destination-reverse .destination-copy {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.info-subsection {
+  width: min(100%, var(--content-width));
+  margin: 42px auto 0;
+}
+
+.info-subsection > h3 {
+  margin-bottom: 22px;
+  font-size: 25px;
+}
+
+.info-section > .section-heading {
+  margin-bottom: 40px;
+}
+
+.footer-brand {
+  display: inline-block;
+  margin-bottom: 8px;
+  color: var(--brown);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.back-to-top {
+  display: inline-block;
+  margin-top: 14px;
+  color: var(--orange);
+  font-size: 11px;
+}
+
+@media (max-width: 760px) {
+  .today-panel {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .today-visual {
+    grid-row: 1;
+  }
+
+  .destination-section {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 28px;
+  }
+
+  .destination-visual {
+    min-height: 280px;
+  }
+
+  .destination-copy {
+    max-width: none;
+  }
+
+  .destination-reverse .destination-visual,
+  .destination-reverse .destination-copy {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .planning-heading-row .day-filters {
+    margin-top: 24px;
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
+  }
+}
+
+@media (max-width: 420px) {
+  .destination-visual {
+    min-height: 230px;
+  }
+}
+
