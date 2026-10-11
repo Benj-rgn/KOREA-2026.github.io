@@ -231,15 +231,15 @@
     const firstDay = data.days[0];
     const lastDay = data.days[data.days.length - 1];
 
-    if (todayISO < firstDay.date) {
-      activitiesContainer.innerHTML = `
-        <p class="today-location">Le voyage approche</p>
-        <p class="today-intro">
-          Le départ est prévu le ${escapeHTML(formatFullDate(firstDay.date))}.
-        </p>
-        <a class="text-link" href="#planning">Voir le planning complet ↗</a>
-      `;
-    } else {
+  if (todayISO < firstDay.date) {
+  activitiesContainer.innerHTML = `
+    <p class="today-location">Le voyage approche</p>
+    <p class="today-intro">
+      Départ le vendredi 23 octobre 2026. Direction la Corée du Sud !
+    </p>
+    <a class="text-link" href="#planning">Voir le planning complet ↗</a>
+  `;
+  } else {
       activitiesContainer.innerHTML = `
         <p class="today-location">Voyage terminé</p>
         <p class="today-intro">
