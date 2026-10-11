@@ -532,22 +532,34 @@ section[id] {
   box-shadow: var(--shadow);
 }
 
-.today-visual.destination-seoul {
+.today-visual.destination-waiting {
   background-image:
     linear-gradient(0deg, rgb(28 31 25 / 12%), transparent),
-    url("./hero-couple.jpeg");
+    url("./images/waiting-plane.jpg");
+}
+
+.today-visual.destination-seoul-start {
+  background-image:
+    linear-gradient(0deg, rgb(28 31 25 / 12%), transparent),
+    url("./images/seoul-start.jpg");
 }
 
 .today-visual.destination-busan {
   background-image:
     linear-gradient(0deg, rgb(28 31 25 / 15%), transparent),
-    url("https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=1200&q=85");
+    url("./images/busan.jpg");
 }
 
 .today-visual.destination-gyeongju {
   background-image:
     linear-gradient(0deg, rgb(28 31 25 / 15%), transparent),
-    url("https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?auto=format&fit=crop&w=1200&q=85");
+    url("./images/gyeongju.jpg");
+}
+
+.today-visual.destination-seoul-return {
+  background-image:
+    linear-gradient(0deg, rgb(28 31 25 / 12%), transparent),
+    url("./images/seoul-return.jpg");
 }
 
 /* -------------------- Activities -------------------- */
