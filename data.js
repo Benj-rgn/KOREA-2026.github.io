@@ -124,14 +124,20 @@ window.KOREA_DATA = {
       status: "known",
       notes: "Hébergement prévu pour les nuits à Séoul."
     },
+
     {
       id: "busan-stay",
       city: "Busan",
       name: "Sunset Hotel",
       area: "Haeundae",
+      address: "46, Gunam-ro, Haeundae-gu, 48094 Busan, Corée du Sud",
+      startDate: "2026-10-26",
+      endDate: "2026-10-28",
+      mapsUrl: "https://map.naver.com/p/search/Sunset%20Hotel%20Busan",
       status: "known",
-      notes: "Hébergement à Busan, dans le quartier de Haeundae."
-    },
+      notes: "Séjour du 26 au 28 octobre, dans le quartier de Haeundae."
+    }
+
     {
       id: "gyeongju-hanok",
       city: "Gyeongju",
