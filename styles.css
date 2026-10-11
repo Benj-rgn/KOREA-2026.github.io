@@ -1400,3 +1400,63 @@ section[id] {
     animation-iteration-count: 1 !important;
   }
 }
+
+
+/* Correctif mobile — timeline complète */
+@media (max-width: 760px) {
+  .route-map {
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .route-timeline {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    width: 100%;
+    min-width: 0;
+    padding: 20px 8px 18px;
+  }
+
+  .route-timeline::before {
+    top: 26px;
+    right: 12.5%;
+    left: 12.5%;
+  }
+
+  .route-stop {
+    display: flex;
+    min-width: 0;
+    flex: initial;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 1px;
+    text-align: center;
+  }
+
+  .route-stop-marker {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 13px;
+    margin-bottom: 5px;
+  }
+
+  .route-stop-number {
+    font-size: 9px;
+  }
+
+  .route-stop-city {
+    font-size: clamp(7px, 2.5vw, 10px);
+    letter-spacing: 0;
+    overflow-wrap: normal;
+  }
+
+  .route-stop-date {
+    font-size: clamp(7px, 2.1vw, 9px);
+    white-space: normal;
+  }
+
+  .route-connector {
+    display: none;
+  }
+}
+
