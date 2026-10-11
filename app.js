@@ -55,31 +55,37 @@
     return current || null;
   }
 
-  function renderRoute() {
-    const container = $("#routeTimeline");
-    if (!container) return;
+  
+function renderRoute() {
+  const container = $("#routeTimeline");
+  if (!container) return;
 
-    const currentRoute = getCurrentRoute();
+  const currentRoute = getCurrentRoute();
 
-    container.innerHTML = `
-      <div class="route-timeline">
-        ${data.route.map((step, index) => {
-          const active = currentRoute && currentRoute.id === step.id;
-          const passed = todayISO >= step.endDate;
-          return `
-            <a class="route-stop${active ? " is-current" : ""}${passed ? " is-past" : ""}"
-               href="#${escapeHTML(step.sectionId)}"
-               ${active ? 'aria-current="location"' : ""}>
-              <span class="route-stop-marker">${escapeHTML(step.number)}</span>
-              <span class="route-stop-city">${escapeHTML(step.city)}</span>
-              <span class="route-stop-date">${escapeHTML(step.dates)}</span>
-            </a>
-            ${index < data.route.length - 1 ? '<span class="route-connector" aria-hidden="true"></span>' : ""}
-          `;
-        }).join("")}
-      </div>
-    `;
-  }
+  container.innerHTML = `
+    <div class="route-timeline">
+      ${data.route.map((step, index) => {
+        const active = currentRoute && currentRoute.id === step.id;
+        const passed = todayISO >= step.endDate;
+
+        return `
+          <a class="route-stop${active ? " is-current" : ""}${passed ? " is-past" : ""}"
+             href="#${escapeHTML(step.sectionId)}"
+             ${active ? 'aria-current="location"' : ""}>
+            <span class="route-stop-marker" aria-hidden="true"></span>
+            <span class="route-stop-number">${escapeHTML(step.number)}</span>
+            <span class="route-stop-city">${escapeHTML(step.city)}</span>
+            <span class="route-stop-date">${escapeHTML(step.dates)}</span>
+          </a>
+          ${index < data.route.length - 1
+            ? '<span class="route-connector" aria-hidden="true"></span>'
+            : ""}
+        `;
+      }).join("")}
+    </div>
+  `;
+}
+
 
   function renderTransport(date) {
     const train = (data.transport || []).find((item) => item.date === date);
