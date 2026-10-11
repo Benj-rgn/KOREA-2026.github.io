@@ -73,7 +73,7 @@
   }
 
   // =========================================================
-  // 3. ITINÉRAIRE — FRISE HORIZONTALE
+  // 3. ITINÉRAIRE — FRISE HORIZONTALE INTERACTIVE
   // =========================================================
 
   function renderRoute() {
@@ -84,25 +84,23 @@
 
     container.innerHTML = `
       <div class="route-timeline">
-        ${data.route.map((step, index) => {
+        ${data.route.map((step) => {
           const isCurrent = currentRoute?.id === step.id;
           const isPast = todayISO >= step.endDate && !isCurrent;
 
           return `
             <a
               class="route-stop${isCurrent ? " is-current" : ""}${isPast ? " is-past" : ""}"
-              href="#${escapeHTML(step.sectionId)}"
+              href="#planning"
+              data-route-place="${escapeHTML(step.city)}"
               ${isCurrent ? 'aria-current="location"' : ""}
-              aria-label="${escapeHTML(`${step.city}, ${step.dates}`)}"
+              aria-label="${escapeHTML(`${step.city}, ${step.dates}. Ouvrir le planning filtré sur ${step.city}.`)}"
             >
               <span class="route-stop-marker" aria-hidden="true"></span>
               <span class="route-stop-number">${escapeHTML(step.number)}</span>
               <span class="route-stop-city">${escapeHTML(step.city)}</span>
               <span class="route-stop-date">${escapeHTML(step.dates)}</span>
             </a>
-            ${index < data.route.length - 1
-              ? '<span class="route-connector" aria-hidden="true"></span>'
-              : ""}
           `;
         }).join("")}
       </div>
@@ -359,10 +357,43 @@
     renderDays();
   }
 
+  // Clic sur les filtres du planning
   if (filtersContainer) {
     filtersContainer.addEventListener("click", (event) => {
       const button = event.target.closest("button[data-place]");
       if (button) selectPlace(button.dataset.place);
+    });
+  }
+
+  // NOUVEAU : clic sur la timeline pour ouvrir le planning filtré
+  const routeContainer = $("#routeTimeline");
+
+  if (routeContainer) {
+    routeContainer.addEventListener("click", (event) => {
+      const link = event.target.closest("a[data-route-place]");
+      if (!link) return;
+
+      event.preventDefault();
+
+      const place = link.dataset.routePlace;
+
+      // Active le filtre correspondant à l'étape choisie
+      selectPlace(place);
+
+      // Ouvre la section du planning
+      const planningSection = $("#planning");
+
+      if (planningSection) {
+        planningSection.scrollIntoView({
+          behavior: "smooth",
+          block: "start"
+        });
+      }
+
+      // Met à jour l'URL sans recharger la page
+      if (window.location.hash !== "#planning") {
+        window.history.replaceState(null, "", "#planning");
+      }
     });
   }
 
