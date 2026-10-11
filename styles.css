@@ -1260,3 +1260,297 @@ h4 {
     grid-template-columns: 1fr;
   }
 }
+
+
+/* -----------------------------------------
+   DETAILED DAILY ITINERARY
+   ----------------------------------------- */
+
+.day-intro {
+  margin-bottom: 20px;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.day-details {
+  margin-top: 22px;
+  border-top: 1px solid var(--border);
+}
+
+.day-details > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 17px 0;
+  color: var(--main);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 800;
+  list-style: none;
+}
+
+.day-details > summary::-webkit-details-marker {
+  display: none;
+}
+
+.day-details > summary::after {
+  content: "+";
+  margin-left: auto;
+  color: var(--accent);
+  font-size: 20px;
+}
+
+.day-details[open] > summary::after {
+  content: "−";
+}
+
+.day-details > summary span {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 600;
+}
+
+.activity-list {
+  display: grid;
+  gap: 0;
+  padding-bottom: 8px;
+}
+
+.activity-item {
+  display: grid;
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 13px;
+  padding: 13px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.055);
+}
+
+.activity-item:last-child {
+  border-bottom: 0;
+}
+
+.activity-marker {
+  display: flex;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--secondary);
+  background: var(--soft);
+  font-size: 9px;
+  font-weight: 800;
+}
+
+.activity-body {
+  min-width: 0;
+}
+
+.activity-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 12px;
+}
+
+.activity-heading h4 {
+  margin: 0;
+  color: var(--main);
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.5;
+}
+
+.activity-time {
+  flex-shrink: 0;
+  color: var(--accent);
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.activity-body p {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.activities-empty {
+  padding: 10px 0 18px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+/* Confirmed train cards */
+
+.transport-card {
+  margin: 22px 0;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: #f8f5ef;
+}
+
+.transport-eyebrow {
+  margin: 0 0 20px;
+  color: var(--secondary);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+}
+
+.transport-route {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(65px, 0.8fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.transport-station {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.transport-station:last-child {
+  text-align: right;
+}
+
+.transport-station strong {
+  color: var(--main);
+  font-size: clamp(23px, 3vw, 32px);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.transport-station span {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.transport-middle {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: 10px;
+  text-align: center;
+}
+
+.transport-line {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 1px;
+  background: #c8b7a2;
+}
+
+.transport-line::after {
+  position: absolute;
+  top: -4px;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  border-top: 1px solid #a88c70;
+  border-right: 1px solid #a88c70;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.transport-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 20px;
+  padding-top: 18px;
+}
+
+.transport-details p {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.transport-details p strong {
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.transport-details p span {
+  color: var(--main);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+@media (max-width: 760px) {
+  .day-details {
+    margin-top: 18px;
+  }
+
+  .transport-card {
+    padding: 17px;
+  }
+
+  .transport-route {
+    gap: 7px;
+  }
+
+  .transport-station strong {
+    font-size: 25px;
+  }
+
+  .transport-station span {
+    font-size: 10px;
+  }
+
+  .transport-details {
+    gap: 14px 12px;
+  }
+
+  .activity-item {
+    grid-template-columns: 28px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .activity-marker {
+    width: 27px;
+    height: 27px;
+  }
+}
+
+@media (max-width: 380px) {
+  .transport-card {
+    padding: 13px;
+  }
+
+  .transport-route {
+    grid-template-columns: minmax(0, 1fr) 55px minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .transport-station strong {
+    font-size: 22px;
+  }
+
+  .transport-station span {
+    font-size: 9px;
+  }
+
+  .transport-details p span {
+    font-size: 11px;
+  }
+}
