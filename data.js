@@ -111,16 +111,20 @@ window.KOREA_DATA = {
     }
   ],
 
+
   accommodations: [
     {
       id: "seoul-hotel",
       city: "Séoul",
       name: "Hotel Anteroom Seoul",
       area: "Gangnam",
+      address: "153 Dosan-daero, Gangnam-gu, Seoul, Corée du Sud",
+      startDate: "2026-10-24",
+      endDate: "2026-10-26",
+      mapsUrl: "https://map.naver.com/p/search/Hotel%20Anteroom%20Seoul",
       status: "known",
-      notes: "Hébergement prévu pour les nuits à Séoul."
+      notes: "Premier séjour à Séoul : du 24 au 26 octobre 2026 (2 nuits)."
     },
-
     {
       id: "busan-stay",
       city: "Busan",
@@ -131,18 +135,34 @@ window.KOREA_DATA = {
       endDate: "2026-10-28",
       mapsUrl: "https://map.naver.com/p/search/Sunset%20Hotel%20Busan",
       status: "known",
-      notes: "Séjour du 26 au 28 octobre, dans le quartier de Haeundae."
+      notes: "Séjour du 26 au 28 octobre 2026 (2 nuits)."
     },
-
     {
       id: "gyeongju-hanok",
       city: "Gyeongju",
       name: "Hanok Stay Leafy Dalshimnal",
       room: "Ondol Room",
+      address: "Gyeongju-si, Gyeongsangbuk-do 38170, Corée du Sud",
+      startDate: "2026-10-28",
+      endDate: "2026-10-30",
+      mapsUrl: "https://map.naver.com/p/search/Hanok%20Stay%20Leafy%20Dalshimnal%20Gyeongju",
       status: "known",
-      notes: "Hébergement de style hanok à Gyeongju."
+      notes: "Séjour dans un hébergement traditionnel coréen du 28 au 30 octobre 2026 (2 nuits)."
+    },
+    {
+      id: "seoul-hotel-return",
+      city: "Séoul",
+      name: "Hotel Anteroom Seoul",
+      area: "Gangnam",
+      address: "153 Dosan-daero, Gangnam-gu, Seoul, Corée du Sud",
+      startDate: "2026-10-30",
+      endDate: "2026-11-04",
+      mapsUrl: "https://map.naver.com/p/search/Hotel%20Anteroom%20Seoul",
+      status: "known",
+      notes: "Second séjour à Séoul : du 30 octobre au 4 novembre 2026 (5 nuits)."
     }
   ],
+
 
   importantEvents: [
     {
