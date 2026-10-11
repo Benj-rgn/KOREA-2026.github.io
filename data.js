@@ -78,7 +78,6 @@ window.KOREA_DATA = {
       endDate: "2026-10-26",
       dates: "24–26 OCT",
       description: "Arrivée en Corée, moments en famille et anniversaire de Papa.",
-      sectionId: "seoul"
     },
     {
       id: "busan",
@@ -89,7 +88,6 @@ window.KOREA_DATA = {
       endDate: "2026-10-28",
       dates: "26–28 OCT",
       description: "Découvertes côtières, gastronomie et paysages maritimes.",
-      sectionId: "busan"
     },
     {
       id: "gyeongju",
@@ -100,7 +98,6 @@ window.KOREA_DATA = {
       endDate: "2026-10-30",
       dates: "28–30 OCT",
       description: "Patrimoine historique, nature et découverte à vélo.",
-      sectionId: "gyeongju"
     },
     {
       id: "seoul-return",
@@ -111,7 +108,6 @@ window.KOREA_DATA = {
       endDate: "2026-11-04",
       dates: "30 OCT–4 NOV",
       description: "Retour à Séoul, mariage familial et dernières découvertes.",
-      sectionId: "seoul"
     }
   ],
 
