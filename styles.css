@@ -266,6 +266,7 @@ section[id] {
 }
 
 .hero-period {
+  color: var(--orange);
   letter-spacing: -0.04em;
 }
 
