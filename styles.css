@@ -1,11 +1,10 @@
 
-/* =========================================================
-   KOREA 2026 — Design system
-   Palette : crème, brun, orange et vert
-   ========================================================= */
+/* ==========================================================
+   KOREA 2026 — Complete stylesheet
+   Palette: cream, brown, terracotta and sage green
+   ========================================================== */
 
 :root {
-  color-scheme: light;
   --cream: #f7f4ed;
   --paper: #fffdf8;
   --paper-dark: #eee8dc;
@@ -16,29 +15,36 @@
   --orange: #c76e43;
   --orange-light: #f0dfd1;
   --green: #596b51;
-  --green-light: #e4e9de;
   --line: #ded8cc;
-  --white: #fff;
-  --radius: 5px;
-  --radius-large: 12px;
+  --white: #ffffff;
+
   --content-width: 1180px;
-  --page-gutter: clamp(20px, 5.5vw, 84px);
+  --gutter: clamp(22px, 5.5vw, 84px);
+  --radius: 6px;
+  --radius-large: 12px;
+  --shadow: 0 10px 30px rgb(49 42 30 / 6%);
+
   --serif: Georgia, "Times New Roman", serif;
   --sans: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  --shadow: 0 10px 30px rgb(49 42 30 / 6%);
 }
+
+/* -------------------- Reset and base -------------------- */
 
 * {
   box-sizing: border-box;
 }
 
 html {
+  width: 100%;
   scroll-behavior: smooth;
-  scroll-padding-top: 92px;
+  scroll-padding-top: 90px;
 }
 
 body {
+  width: 100%;
+  max-width: 100%;
   margin: 0;
+  overflow-x: clip;
   background: var(--cream);
   color: var(--ink);
   font-family: var(--sans);
@@ -48,10 +54,9 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-body,
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
+main {
+  width: 100%;
+  min-width: 0;
 }
 
 img {
@@ -62,15 +67,12 @@ img {
 a {
   color: inherit;
   text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button {
   font: inherit;
-}
-
-button,
-a {
-  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 button:focus-visible,
@@ -106,47 +108,43 @@ h4 {
 }
 
 h2 {
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   font-family: var(--serif);
-  font-size: clamp(2.1rem, 4vw, 3.4rem);
+  font-size: clamp(2.2rem, 4.5vw, 3.5rem);
   letter-spacing: -0.045em;
-}
-
-h3 {
-  font-family: var(--serif);
-  font-size: clamp(1.35rem, 2.3vw, 1.8rem);
-  letter-spacing: -0.025em;
 }
 
 p {
   color: var(--muted);
 }
 
-section[id],
-header[id] {
-  scroll-margin-top: 90px;
-}
-
-.container,
-.section-inner {
-  width: min(calc(100% - 2 * var(--page-gutter)), var(--content-width));
-  margin-inline: auto;
+section[id] {
+  scroll-margin-top: 88px;
 }
 
 .section {
-  padding-block: clamp(68px, 9vw, 118px);
+  width: 100%;
+  padding: clamp(70px, 9vw, 116px) var(--gutter);
 }
 
-.section-subtitle {
-  max-width: 600px;
-  margin-bottom: 40px;
-  color: var(--muted);
-  font-size: 15px;
+.section-heading {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 0 auto 36px;
 }
 
-.eyebrow,
-.section-label {
-  margin-bottom: 15px;
+.section-heading h2 {
+  margin-bottom: 16px;
+}
+
+.section-heading > p:not(.eyebrow) {
+  max-width: 620px;
+  margin-bottom: 0;
+  font-size: 14px;
+}
+
+.eyebrow {
+  margin-bottom: 16px;
   color: var(--orange);
   font-size: 10px;
   font-weight: 700;
@@ -155,9 +153,7 @@ header[id] {
   text-transform: uppercase;
 }
 
-/* =========================================================
-   Header and navigation
-   ========================================================= */
+/* -------------------- Header -------------------- */
 
 .site-header {
   position: sticky;
@@ -168,9 +164,9 @@ header[id] {
   align-items: center;
   justify-content: space-between;
   gap: 28px;
-  padding: 0 var(--page-gutter);
+  padding: 0 var(--gutter);
   border-bottom: 1px solid rgb(81 67 52 / 10%);
-  background: rgb(247 244 237 / 95%);
+  background: rgb(247 244 237 / 96%);
   backdrop-filter: blur(14px);
 }
 
@@ -183,17 +179,22 @@ header[id] {
   white-space: nowrap;
 }
 
+.brand-year {
+  font-weight: 500;
+}
+
 .nav {
   display: flex;
   align-items: center;
-  gap: clamp(14px, 2.5vw, 34px);
+  gap: clamp(12px, 2vw, 28px);
 }
 
 .nav a {
   position: relative;
-  padding-block: 27px;
+  padding: 27px 0;
   color: var(--muted);
   font-size: 11px;
+  white-space: nowrap;
   transition: color 180ms ease;
 }
 
@@ -219,13 +220,7 @@ header[id] {
   transform: scaleX(1);
 }
 
-.mobile-nav {
-  display: none;
-}
-
-/* =========================================================
-   Hero
-   ========================================================= */
+/* -------------------- Hero -------------------- */
 
 .hero {
   position: relative;
@@ -234,7 +229,7 @@ header[id] {
   align-items: center;
   overflow: hidden;
   isolation: isolate;
-  padding: clamp(56px, 9vw, 120px) var(--page-gutter);
+  padding: clamp(60px, 9vw, 120px) var(--gutter);
   background-color: #756b5c;
   background-image:
     linear-gradient(
@@ -249,21 +244,10 @@ header[id] {
   color: var(--white);
 }
 
-.hero::after {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  background: linear-gradient(
-    0deg,
-    rgb(20 20 17 / 24%) 0%,
-    transparent 42%
-  );
-  content: "";
-}
-
 .hero-content {
-  width: min(760px, 100%);
-  margin-left: max(0px, calc((100vw - var(--content-width)) / 2 - var(--page-gutter)));
+  width: 100%;
+  max-width: 760px;
+  margin-inline: auto;
 }
 
 .hero .eyebrow {
@@ -272,75 +256,49 @@ header[id] {
 }
 
 .hero h1 {
-  max-width: 760px;
   margin-bottom: 28px;
   color: var(--white);
   font-family: var(--serif);
-  font-size: clamp(4rem, 10vw, 8.8rem);
+  font-size: clamp(4.5rem, 10vw, 8.8rem);
   font-weight: 400;
   letter-spacing: -0.075em;
   line-height: 0.9;
 }
 
+.hero-period {
+  letter-spacing: -0.04em;
+}
+
 .hero-description {
-  margin: 0;
-  color: rgb(255 255 255 / 88%);
+  margin-bottom: 0;
+  color: rgb(255 255 255 / 90%);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.25em;
 }
 
-/* =========================================================
-   Shared section headings
-   ========================================================= */
+/* -------------------- Route timeline -------------------- */
 
-.map-section,
-.planning-section,
-.info-section,
-.city-section {
-  padding: clamp(70px, 9vw, 116px) var(--page-gutter);
-}
-
-.map-section,
-.info-section {
+.map-section {
   background: var(--paper);
 }
 
-.planning-section {
-  background: var(--cream);
-}
-
-.city-section {
-  border-top: 1px solid var(--line);
-}
-
-.map-section > h2,
-.planning-section > h2,
-.info-section > h2,
-.city-section > h2,
-.map-section > .section-inner > h2,
-.planning-section > .section-inner > h2,
-.info-section > .section-inner > h2,
-.city-section > .section-inner > h2 {
+.map-section > .section-heading,
+.route-map {
+  width: 100%;
   max-width: var(--content-width);
-  margin-right: auto;
-  margin-left: auto;
+  margin-inline: auto;
 }
-
-/* =========================================================
-   Route timeline
-   ========================================================= */
 
 .route-map {
-  width: min(calc(100% - 2 * var(--page-gutter)), var(--content-width));
-  margin: 0 auto;
+  min-width: 0;
 }
 
 .route-timeline {
   display: grid;
-  grid-template-columns: 1fr 0.28fr 1fr 0.28fr 1fr;
+  grid-template-columns: minmax(0, 1fr) 0.25fr minmax(0, 1fr) 0.25fr minmax(0, 1fr) 0.25fr minmax(0, 1fr);
   align-items: center;
-  padding: 34px 0 8px;
+  padding: 25px 0 5px;
 }
 
 .route-stop {
@@ -362,24 +320,24 @@ header[id] {
   background: var(--paper);
   color: var(--muted);
   font-size: 11px;
-  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
-}
-
-.route-stop:hover .route-stop-marker {
-  border-color: var(--orange);
-  color: var(--orange);
+  transition: all 180ms ease;
 }
 
 .route-stop-city {
   color: var(--brown);
   font-family: var(--serif);
-  font-size: clamp(1.25rem, 2.8vw, 2rem);
-  line-height: 1.1;
+  font-size: clamp(1.15rem, 2.2vw, 1.9rem);
+  line-height: 1.15;
 }
 
 .route-stop-date {
   color: var(--muted);
-  font-size: 12px;
+  font-size: 11px;
+}
+
+.route-stop:hover .route-stop-marker {
+  border-color: var(--orange);
+  color: var(--orange);
 }
 
 .route-stop.is-current .route-stop-marker {
@@ -403,36 +361,37 @@ header[id] {
 }
 
 .route-connector {
-  display: block;
   height: 1px;
-  margin: 0 12px 42px 0;
+  margin: 0 10px 42px 0;
   background: var(--line);
 }
 
-/* =========================================================
-   Today's program
-   ========================================================= */
+/* -------------------- Today's program -------------------- */
 
 .today-section {
-  padding: clamp(70px, 9vw, 116px) var(--page-gutter);
   background: var(--paper-dark);
 }
 
-.today-layout {
+.today-panel {
   display: grid;
-  width: min(100%, var(--content-width));
-  grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.9fr);
-  align-items: stretch;
-  gap: clamp(32px, 6vw, 76px);
+  width: 100%;
+  max-width: var(--content-width);
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+  align-items: start;
+  gap: clamp(30px, 6vw, 76px);
   margin-inline: auto;
 }
 
-.today-copy {
+.today-content,
+.today-activities {
   min-width: 0;
 }
 
-.today-date,
-#todayDate {
+.today-heading h2 {
+  margin-bottom: 12px;
+}
+
+.today-date {
   margin-bottom: 28px;
   color: var(--muted);
   font-size: 12px;
@@ -449,16 +408,17 @@ header[id] {
 }
 
 .today-intro {
-  max-width: 620px;
-  margin-bottom: 28px;
-  font-size: 15px;
+  margin-bottom: 25px;
+  font-size: 14px;
   line-height: 1.8;
 }
 
 .today-visual {
+  width: 100%;
+  min-width: 0;
   min-height: 420px;
   border-radius: var(--radius-large);
-  background-color: #a49b87;
+  background-color: #b7ae9c;
   background-position: center;
   background-size: cover;
   box-shadow: var(--shadow);
@@ -482,12 +442,12 @@ header[id] {
     url("https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?auto=format&fit=crop&w=1200&q=85");
 }
 
-/* Activity list */
+/* -------------------- Activities -------------------- */
 
 .activity-list {
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
+  margin-top: 18px;
 }
 
 .activity-item {
@@ -541,12 +501,11 @@ header[id] {
   font-size: 14px;
 }
 
-/* =========================================================
-   Train / transport cards
-   ========================================================= */
+/* -------------------- Train cards -------------------- */
 
 .transport-card {
-  margin: 28px 0;
+  min-width: 0;
+  margin: 26px 0;
   padding: clamp(20px, 3vw, 30px);
   border: 1px solid var(--line);
   border-radius: var(--radius-large);
@@ -554,7 +513,7 @@ header[id] {
 }
 
 .transport-eyebrow {
-  margin-bottom: 24px;
+  margin-bottom: 22px;
   color: var(--green);
   font-size: 10px;
   font-weight: 700;
@@ -563,10 +522,10 @@ header[id] {
 
 .transport-route {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(70px, 0.6fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(60px, 0.6fr) minmax(0, 1fr);
   align-items: center;
   gap: 12px;
-  padding-bottom: 24px;
+  padding-bottom: 22px;
   border-bottom: 1px solid var(--line);
 }
 
@@ -632,6 +591,7 @@ header[id] {
 
 .transport-details p {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   gap: 3px;
   margin-bottom: 0;
@@ -650,15 +610,33 @@ header[id] {
   font-weight: 600;
 }
 
-/* =========================================================
-   Full itinerary
-   ========================================================= */
+/* -------------------- Full itinerary -------------------- */
+
+.planning-section {
+  background: var(--cream);
+}
+
+.planning-heading-row,
+.timeline {
+  width: 100%;
+  max-width: var(--content-width);
+  min-width: 0;
+  margin-inline: auto;
+}
+
+.planning-heading-row .section-heading {
+  margin-bottom: 0;
+}
+
+.planning-heading-row .section-heading > p {
+  margin-bottom: 0;
+}
 
 .day-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 34px 0 42px;
+  margin: 30px 0 40px;
 }
 
 .filter {
@@ -669,7 +647,7 @@ header[id] {
   color: var(--muted);
   cursor: pointer;
   font-size: 12px;
-  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+  transition: all 180ms ease;
 }
 
 .filter:hover {
@@ -683,16 +661,11 @@ header[id] {
   color: var(--white);
 }
 
-.timeline {
-  width: min(100%, var(--content-width));
-  margin-inline: auto;
-}
-
 .day {
   display: grid;
-  grid-template-columns: 160px minmax(0, 1fr);
-  gap: clamp(22px, 4vw, 54px);
-  padding: 34px 0;
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: clamp(24px, 4vw, 54px);
+  padding: 32px 0;
   border-top: 1px solid var(--line);
 }
 
@@ -701,14 +674,15 @@ header[id] {
 }
 
 .day.is-today {
-  margin-inline: -18px;
-  padding-inline: 18px;
+  margin-inline: -16px;
+  padding-inline: 16px;
   border-radius: var(--radius);
-  background: rgb(255 253 248 / 75%);
+  background: rgb(255 253 248 / 78%);
 }
 
 .day-date {
   display: flex;
+  min-width: 0;
   flex-direction: column;
   align-items: flex-start;
   gap: 7px;
@@ -741,6 +715,7 @@ header[id] {
 
 .day-heading h3 {
   margin-bottom: 0;
+  font-size: clamp(1.4rem, 2.5vw, 1.8rem);
 }
 
 .day-tag {
@@ -755,22 +730,21 @@ header[id] {
 }
 
 .day-intro {
-  max-width: 700px;
+  max-width: 720px;
   margin-bottom: 18px;
   font-size: 13px;
   line-height: 1.8;
 }
 
 .day-details {
-  margin-top: 22px;
+  margin-top: 20px;
   border-top: 1px solid var(--line);
 }
 
 .day-details summary {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 16px;
+  gap: 14px;
   padding: 16px 0;
   color: var(--brown);
   cursor: pointer;
@@ -787,6 +761,7 @@ header[id] {
   width: 7px;
   height: 7px;
   flex-shrink: 0;
+  margin-left: auto;
   border-right: 1px solid currentColor;
   border-bottom: 1px solid currentColor;
   content: "";
@@ -799,43 +774,127 @@ header[id] {
 }
 
 .day-details summary span {
-  margin-left: auto;
   color: var(--muted);
   font-size: 11px;
   font-weight: 400;
 }
 
-/* =========================================================
-   City sections
-   ========================================================= */
+/* -------------------- Destination sections -------------------- */
 
-.city-section:nth-of-type(even) {
+.destination-section {
+  display: grid;
+  width: 100%;
+  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  align-items: center;
+  gap: clamp(32px, 7vw, 90px);
+  padding: clamp(70px, 9vw, 112px) var(--gutter);
+  border-top: 1px solid var(--line);
+  background: var(--cream);
+}
+
+.destination-section:nth-of-type(even) {
   background: var(--paper);
 }
 
-.city-section h2 {
-  margin-bottom: 28px;
+.destination-visual {
+  width: 100%;
+  min-width: 0;
+  min-height: 380px;
+  border-radius: var(--radius-large);
+  background-color: var(--paper-dark);
+  background-position: center;
+  background-size: cover;
 }
 
-.city-section p {
-  max-width: 720px;
+.destination-visual.destination-seoul {
+  background-image:
+    linear-gradient(0deg, rgb(28 31 25 / 12%), transparent),
+    url("./hero-couple.jpeg");
 }
 
-/* =========================================================
-   Practical information
-   ========================================================= */
+.destination-visual.destination-busan {
+  background-image:
+    linear-gradient(0deg, rgb(28 31 25 / 15%), transparent),
+    url("https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=1200&q=85");
+}
 
-.info-grid,
-.accommodation-cards,
-.flight-cards {
+.destination-visual.destination-gyeongju {
+  background-image:
+    linear-gradient(0deg, rgb(28 31 25 / 15%), transparent),
+    url("https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?auto=format&fit=crop&w=1200&q=85");
+}
+
+.destination-copy {
+  width: 100%;
+  max-width: 520px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.destination-copy .eyebrow {
+  margin-bottom: 18px;
+}
+
+.destination-copy h2 {
+  margin-bottom: 16px;
+}
+
+.destination-copy .destination-dates {
+  margin-bottom: 20px;
+  color: var(--orange);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.destination-copy > p:not(.eyebrow) {
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+.destination-copy .text-link {
+  margin-top: 12px;
+}
+
+.destination-reverse .destination-visual {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.destination-reverse .destination-copy {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+/* -------------------- Practical information -------------------- */
+
+.info-section {
+  background: var(--paper);
+}
+
+.info-section > .section-heading {
+  margin-bottom: 42px;
+}
+
+.info-subsection {
+  width: 100%;
+  max-width: var(--content-width);
+  margin: 42px auto 0;
+}
+
+.info-subsection > h3 {
+  margin-bottom: 22px;
+  color: var(--brown);
+  font-family: var(--serif);
+  font-size: 25px;
+  font-weight: 400;
+}
+
+.info-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 18px;
-}
-
-.accommodation-cards,
-.flight-cards {
-  margin-bottom: 42px;
 }
 
 .info-card {
@@ -896,67 +955,78 @@ header[id] {
   text-decoration-color: currentColor;
 }
 
-/* =========================================================
-   Footer
-   ========================================================= */
+/* -------------------- Footer -------------------- */
 
-.site-footer,
-footer {
-  padding: 30px var(--page-gutter);
+.site-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 32px var(--gutter);
   border-top: 1px solid var(--line);
   background: var(--cream);
   text-align: center;
 }
 
-.site-footer p,
-footer p {
-  margin: 0;
+.footer-brand {
+  margin-bottom: 8px;
+  color: var(--brown);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.site-footer p {
+  margin-bottom: 0;
   color: var(--muted);
   font-size: 10px;
   letter-spacing: 0.08em;
 }
 
-/* =========================================================
-   Responsive layout
-   ========================================================= */
-
-@media (min-width: 1500px) {
-  .hero {
-    min-height: 760px;
-  }
+.back-to-top {
+  margin-top: 14px;
+  color: var(--orange);
+  font-size: 11px;
 }
 
-@media (max-width: 1000px) {
+/* -------------------- Mobile navigation -------------------- */
+
+.mobile-nav {
+  display: none;
+}
+
+/* -------------------- Tablet -------------------- */
+
+@media (max-width: 1050px) {
+  .site-header {
+    gap: 20px;
+  }
+
   .nav {
-    gap: 15px;
+    gap: 13px;
   }
 
   .nav a {
     font-size: 10px;
   }
 
-  .today-layout {
-    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.75fr);
-    gap: 30px;
+  .destination-section {
+    gap: 36px;
   }
 
-  .today-visual {
-    min-height: 350px;
-  }
-
-  .day {
-    grid-template-columns: 125px minmax(0, 1fr);
+  .destination-visual {
+    min-height: 330px;
   }
 }
 
+/* -------------------- Mobile -------------------- */
+
 @media (max-width: 760px) {
   html {
-    scroll-padding-top: 72px;
+    scroll-padding-top: 70px;
   }
 
   body {
-    padding-bottom: 62px;
-    font-size: 14px;
+    padding-bottom: 64px;
   }
 
   .site-header {
@@ -991,13 +1061,14 @@ footer p {
   .mobile-nav a {
     display: flex;
     flex: 1;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 2px;
     border-radius: var(--radius);
     color: var(--muted);
     font-size: 10px;
-    text-align: center;
-    transition: color 180ms ease, background 180ms ease;
+    line-height: 1.3;
   }
 
   .mobile-nav a.is-active {
@@ -1009,7 +1080,7 @@ footer p {
   .hero {
     min-height: min(680px, calc(100svh - 64px));
     align-items: flex-end;
-    padding: 70px var(--page-gutter) 82px;
+    padding: 70px var(--gutter) 82px;
     background-position: 56% center;
   }
 
@@ -1019,15 +1090,15 @@ footer p {
     inset: 0;
     background: linear-gradient(
       0deg,
-      rgb(24 24 20 / 68%) 0%,
-      rgb(24 24 20 / 30%) 55%,
-      rgb(24 24 20 / 8%) 100%
+      rgb(24 24 20 / 65%) 0%,
+      rgb(24 24 20 / 25%) 58%,
+      rgb(24 24 20 / 5%) 100%
     );
     content: "";
   }
 
   .hero h1 {
-    font-size: clamp(4rem, 17vw, 7rem);
+    font-size: clamp(4rem, 16vw, 7rem);
   }
 
   .hero .eyebrow {
@@ -1036,25 +1107,25 @@ footer p {
 
   .hero-description {
     font-size: 10px;
-    letter-spacing: 0.17em;
+    letter-spacing: 0.16em;
   }
 
-  .map-section,
-  .planning-section,
-  .info-section,
-  .city-section,
-  .today-section {
-    padding: 70px var(--page-gutter);
+  .section {
+    padding: 70px var(--gutter);
+  }
+
+  .section-heading {
+    margin-bottom: 28px;
   }
 
   h2 {
-    font-size: clamp(2.1rem, 10vw, 3rem);
+    font-size: clamp(2.2rem, 10vw, 3rem);
   }
 
   .route-timeline {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
-    padding-top: 10px;
+    padding-top: 8px;
   }
 
   .route-stop {
@@ -1085,9 +1156,9 @@ footer p {
     margin: 0 0 0 17px;
   }
 
-  .today-layout {
+  .today-panel {
     grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
+    gap: 26px;
   }
 
   .today-visual {
@@ -1095,8 +1166,7 @@ footer p {
     grid-row: 1;
   }
 
-  .today-date,
-  #todayDate {
+  .today-date {
     margin-bottom: 22px;
   }
 
@@ -1104,13 +1174,9 @@ footer p {
     padding: 19px;
   }
 
-  .transport-details {
-    gap: 14px;
-  }
-
   .day-filters {
     gap: 7px;
-    margin: 28px 0 32px;
+    margin: 24px 0 30px;
   }
 
   .filter {
@@ -1125,8 +1191,8 @@ footer p {
   }
 
   .day.is-today {
-    margin-inline: -12px;
-    padding-inline: 12px;
+    margin-inline: -10px;
+    padding-inline: 10px;
   }
 
   .day-date {
@@ -1160,26 +1226,44 @@ footer p {
     margin-top: 18px;
   }
 
-  .info-grid,
-  .accommodation-cards,
-  .flight-cards {
+  .destination-section {
     grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
+    gap: 28px;
   }
 
-  .accommodation-cards,
-  .flight-cards {
-    margin-bottom: 30px;
+  .destination-visual {
+    min-height: 280px;
+  }
+
+  .destination-copy {
+    max-width: none;
+  }
+
+  .destination-reverse .destination-visual,
+  .destination-reverse .destination-copy {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .info-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
   }
 
   .info-card {
     padding: 23px;
   }
+
+  .info-subsection {
+    margin-top: 34px;
+  }
 }
+
+/* -------------------- Small phones -------------------- */
 
 @media (max-width: 420px) {
   :root {
-    --page-gutter: 20px;
+    --gutter: 20px;
   }
 
   .hero h1 {
@@ -1189,6 +1273,11 @@ footer p {
   .hero-description {
     font-size: 9px;
     letter-spacing: 0.12em;
+  }
+
+  .today-visual,
+  .destination-visual {
+    min-height: 230px;
   }
 
   .activity-item {
@@ -1220,12 +1309,12 @@ footer p {
     gap: 11px;
   }
 
-  .today-visual {
-    min-height: 230px;
+  .info-card h4 {
+    font-size: 21px;
   }
 }
 
-/* Respect reduced-motion preferences */
+/* -------------------- Reduced motion -------------------- */
 
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1237,214 +1326,3 @@ footer p {
     animation-iteration-count: 1 !important;
   }
 }
-
-
-/* =========================================================
-   Layout alignment — sections defined in index.html
-   ========================================================= */
-
-.section-heading {
-  width: min(100%, var(--content-width));
-  margin: 0 auto 36px;
-}
-
-.section-heading h2 {
-  margin-bottom: 18px;
-}
-
-.section-heading > p:not(.eyebrow) {
-  max-width: 620px;
-  margin-bottom: 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-
-.planning-heading-row {
-  width: min(100%, var(--content-width));
-  margin: 0 auto;
-}
-
-.planning-heading-row .section-heading {
-  margin-bottom: 0;
-}
-
-.planning-heading-row .day-filters {
-  margin-top: 28px;
-}
-
-.today-panel {
-  display: grid;
-  width: min(100%, var(--content-width));
-  grid-template-columns: minmax(0, 1.1fr) minmax(260px, 0.9fr);
-  align-items: start;
-  gap: clamp(30px, 6vw, 76px);
-  margin-inline: auto;
-}
-
-.today-content {
-  min-width: 0;
-}
-
-.today-heading h2 {
-  margin-bottom: 12px;
-}
-
-.today-heading .today-date {
-  margin-bottom: 28px;
-}
-
-.destination-section {
-  display: grid;
-  width: 100%;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-  align-items: center;
-  gap: clamp(32px, 7vw, 90px);
-  padding: clamp(65px, 9vw, 112px) var(--page-gutter);
-  border-top: 1px solid var(--line);
-  background: var(--cream);
-}
-
-.destination-section:nth-of-type(even) {
-  background: var(--paper);
-}
-
-.destination-visual {
-  width: 100%;
-  min-height: 380px;
-  border-radius: var(--radius-large);
-  background-color: var(--paper-dark);
-  background-position: center;
-  background-size: cover;
-}
-
-.destination-visual.destination-seoul {
-  background-image:
-    linear-gradient(0deg, rgb(28 31 25 / 12%), transparent),
-    url("./hero-couple.jpeg");
-}
-
-.destination-visual.destination-busan {
-  background-image:
-    linear-gradient(0deg, rgb(28 31 25 / 15%), transparent),
-    url("https://images.unsplash.com/photo-1517154421773-0529f29ea451?auto=format&fit=crop&w=1200&q=85");
-}
-
-.destination-visual.destination-gyeongju {
-  background-image:
-    linear-gradient(0deg, rgb(28 31 25 / 15%), transparent),
-    url("https://images.unsplash.com/photo-1576675466969-38eeae4b41f6?auto=format&fit=crop&w=1200&q=85");
-}
-
-.destination-copy {
-  max-width: 520px;
-}
-
-.destination-copy .eyebrow {
-  margin-bottom: 18px;
-}
-
-.destination-copy h2 {
-  margin-bottom: 16px;
-}
-
-.destination-copy .destination-dates {
-  margin-bottom: 20px;
-  color: var(--orange);
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-}
-
-.destination-copy > p:not(.eyebrow) {
-  font-size: 14px;
-  line-height: 1.85;
-}
-
-.destination-copy .text-link {
-  margin-top: 12px;
-}
-
-.destination-reverse .destination-visual {
-  grid-column: 2;
-  grid-row: 1;
-}
-
-.destination-reverse .destination-copy {
-  grid-column: 1;
-  grid-row: 1;
-}
-
-.info-subsection {
-  width: min(100%, var(--content-width));
-  margin: 42px auto 0;
-}
-
-.info-subsection > h3 {
-  margin-bottom: 22px;
-  font-size: 25px;
-}
-
-.info-section > .section-heading {
-  margin-bottom: 40px;
-}
-
-.footer-brand {
-  display: inline-block;
-  margin-bottom: 8px;
-  color: var(--brown);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.16em;
-}
-
-.back-to-top {
-  display: inline-block;
-  margin-top: 14px;
-  color: var(--orange);
-  font-size: 11px;
-}
-
-@media (max-width: 760px) {
-  .today-panel {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-  }
-
-  .today-visual {
-    grid-row: 1;
-  }
-
-  .destination-section {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 28px;
-  }
-
-  .destination-visual {
-    min-height: 280px;
-  }
-
-  .destination-copy {
-    max-width: none;
-  }
-
-  .destination-reverse .destination-visual,
-  .destination-reverse .destination-copy {
-    grid-column: 1;
-    grid-row: auto;
-  }
-
-  .planning-heading-row .day-filters {
-    margin-top: 24px;
-  }
-
-  .section-heading {
-    margin-bottom: 28px;
-  }
-}
-
-@media (max-width: 420px) {
-  .destination-visual {
-    min-height: 230px;
-  }
-}
-
