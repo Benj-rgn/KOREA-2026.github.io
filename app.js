@@ -3,184 +3,133 @@
   "use strict";
 
   const data = window.KOREA_DATA;
-
-  if (!data || !Array.isArray(data.route) || !Array.isArray(data.days)) {
-    console.error("Données du voyage absentes ou invalides. Vérifie data.js.");
+  if (!data || !Array.isArray(data.days) || !Array.isArray(data.route)) {
+    console.error("Korea 2026 : données absentes ou invalides.");
     return;
   }
 
   const $ = (selector, root = document) => root.querySelector(selector);
-  const $$ = (selector, root = document) =>
-    Array.from(root.querySelectorAll(selector));
+  const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
 
-  const routeContainer = $("#routeCards");
-  const filtersContainer = $("#dayFilters");
-  const timelineContainer = $("#timeline");
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const todayISO = [
+    today.getFullYear(),
+    String(today.getMonth() + 1).padStart(2, "0"),
+    String(today.getDate()).padStart(2, "0")
+  ].join("-");
 
-  if (!routeContainer || !filtersContainer || !timelineContainer) {
-    console.error("Un conteneur HTML nécessaire est absent. Vérifie index.html.");
-    return;
+  const escapeHTML = (value) => String(value ?? "").replace(/[&<>"']/g, (c) => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[c]);
+
+  function parseDate(value) {
+    return new Date(`${value}T12:00:00`);
   }
 
-  function escapeHTML(value) {
-    return String(value ?? "").replace(/[&<>"']/g, (character) => {
-      const entities = {
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        '"': "&quot;",
-        "'": "&#39;"
-      };
-      return entities[character];
-    });
-  }
-
-  function formatDate(dateString, options = {}) {
-    if (!dateString) return "";
-
-    const date = new Date(`${dateString}T12:00:00`);
-    if (Number.isNaN(date.getTime())) return dateString;
-
+  function formatDate(value, options = {}) {
+    if (!value) return "";
     return new Intl.DateTimeFormat("fr-FR", {
       day: "numeric",
-      month: "short",
+      month: "long",
       ...options
-    }).format(date);
+    }).format(parseDate(value));
   }
 
-  function formatFullDate(dateString) {
-    if (!dateString) return "";
-
-    const date = new Date(`${dateString}T12:00:00`);
-    if (Number.isNaN(date.getTime())) return dateString;
-
+  function formatFullDate(value) {
     return new Intl.DateTimeFormat("fr-FR", {
       weekday: "long",
       day: "numeric",
       month: "long",
       year: "numeric"
-    }).format(date);
+    }).format(parseDate(value));
   }
 
-  // -----------------------------------------
-  // 1. CARTES DU PARCOURS
-  // -----------------------------------------
+  function getCurrentRoute() {
+    const current = data.route.find((step, index) => {
+      const start = step.startDate;
+      const end = step.endDate;
+      return todayISO >= start &&
+        (todayISO < end || (index === data.route.length - 1 && todayISO === end));
+    });
+    return current || null;
+  }
 
-  routeContainer.innerHTML = data.route.map((step) => {
-    const sectionId = step.sectionId || step.id;
+  function renderRoute() {
+    const container = $("#routeTimeline");
+    if (!container) return;
 
-    return `
-      <a
-        class="route-card"
-        href="#${escapeHTML(sectionId)}"
-        aria-label="${escapeHTML(step.city)} : ${escapeHTML(step.dates)}"
-      >
-        <span class="number">
-          ${escapeHTML(step.number)} · ${escapeHTML(step.dates)}
-        </span>
+    const currentRoute = getCurrentRoute();
 
-        <div>
-          <h3>${escapeHTML(step.city)}</h3>
-          <p>${escapeHTML(step.description)}</p>
-        </div>
-
-        <span class="route-card-link" aria-hidden="true">Découvrir →</span>
-      </a>
+    container.innerHTML = `
+      <div class="route-timeline">
+        ${data.route.map((step, index) => {
+          const active = currentRoute && currentRoute.id === step.id;
+          const passed = todayISO >= step.endDate;
+          return `
+            <a class="route-stop${active ? " is-current" : ""}${passed ? " is-past" : ""}"
+               href="#${escapeHTML(step.sectionId)}"
+               ${active ? 'aria-current="location"' : ""}>
+              <span class="route-stop-marker">${escapeHTML(step.number)}</span>
+              <span class="route-stop-city">${escapeHTML(step.city)}</span>
+              <span class="route-stop-date">${escapeHTML(step.dates)}</span>
+            </a>
+            ${index < data.route.length - 1 ? '<span class="route-connector" aria-hidden="true"></span>' : ""}
+          `;
+        }).join("")}
+      </div>
     `;
-  }).join("");
+  }
 
-  // -----------------------------------------
-  // 2. FILTRES ET PLANNING DÉTAILLÉ
-  // -----------------------------------------
-
-  const places = [
-    "Tous",
-    ...new Set(data.days.map((day) => day.place))
-  ];
-
-  let selectedPlace = "Tous";
-
-  filtersContainer.innerHTML = places.map((place, index) => `
-    <button
-      type="button"
-      class="filter${index === 0 ? " active" : ""}"
-      data-place="${escapeHTML(place)}"
-      aria-pressed="${index === 0 ? "true" : "false"}"
-    >
-      ${escapeHTML(place)}
-    </button>
-  `).join("");
-
-  function renderTransport(transportId) {
-    if (!transportId || !Array.isArray(data.transport)) return "";
-
-    const train = data.transport.find(
-      (item) => item.date === transportId
-    );
-
+  function renderTransport(date) {
+    const train = (data.transport || []).find((item) => item.date === date);
     if (!train) return "";
 
     return `
-      <section class="transport-card" aria-label="Informations du train">
-        <p class="transport-eyebrow">TRAJET CONFIRMÉ · ${escapeHTML(train.train)}</p>
-
+      <article class="transport-card" aria-label="Trajet en train confirmé">
+        <p class="transport-eyebrow">TRAIN CONFIRMÉ · ${escapeHTML(train.train)}</p>
         <div class="transport-route">
           <div class="transport-station">
             <strong>${escapeHTML(train.departure)}</strong>
             <span>${escapeHTML(train.from)}</span>
           </div>
-
           <div class="transport-middle">
             <span>${escapeHTML(train.duration)}</span>
             <span class="transport-line" aria-hidden="true"></span>
           </div>
-
           <div class="transport-station">
             <strong>${escapeHTML(train.arrival)}</strong>
             <span>${escapeHTML(train.to)}</span>
           </div>
         </div>
-
         <div class="transport-details">
           <p><strong>Train</strong><span>${escapeHTML(train.train)}</span></p>
           <p><strong>Voiture</strong><span>${escapeHTML(train.carriage)}</span></p>
-          <p><strong>Sièges</strong><span>${escapeHTML(train.seats.join(", "))}</span></p>
+          <p><strong>Sièges</strong><span>${escapeHTML((train.seats || []).join(", "))}</span></p>
           <p><strong>Passagers</strong><span>${escapeHTML(train.passengers)} billets</span></p>
-          <p><strong>Prix par billet</strong><span>${escapeHTML(train.pricePerPerson)}</span></p>
+          <p><strong>Prix par personne</strong><span>${escapeHTML(train.pricePerPerson)}</span></p>
           <p><strong>Total</strong><span>${escapeHTML(train.totalPrice)}</span></p>
         </div>
-      </section>
+      </article>
     `;
   }
 
-  function renderActivities(activities) {
+  function renderActivities(activities, emptyMessage = "Les activités de cette journée restent à définir.") {
     if (!Array.isArray(activities) || activities.length === 0) {
-      return `
-        <div class="activities-empty">
-          <p>Les activités de cette journée restent à définir.</p>
-        </div>
-      `;
+      return `<p class="activities-empty">${escapeHTML(emptyMessage)}</p>`;
     }
 
     return `
       <div class="activity-list">
         ${activities.map((activity, index) => `
           <article class="activity-item">
-            <div class="activity-marker" aria-hidden="true">
-              ${String(index + 1).padStart(2, "0")}
-            </div>
-
+            <span class="activity-marker" aria-hidden="true">${String(index + 1).padStart(2, "0")}</span>
             <div class="activity-body">
               <div class="activity-heading">
                 <h4>${escapeHTML(activity.title)}</h4>
-                ${activity.time
-                  ? `<span class="activity-time">${escapeHTML(activity.time)}</span>`
-                  : ""}
+                ${activity.time ? `<span class="activity-time">${escapeHTML(activity.time)}</span>` : ""}
               </div>
-
-              ${activity.detail
-                ? `<p>${escapeHTML(activity.detail)}</p>`
-                : ""}
+              ${activity.detail ? `<p>${escapeHTML(activity.detail)}</p>` : ""}
             </div>
           </article>
         `).join("")}
@@ -188,49 +137,95 @@
     `;
   }
 
-  function renderDays() {
-    const filteredDays = data.days.filter((day) =>
-      selectedPlace === "Tous" || day.place === selectedPlace
-    );
+  function renderToday() {
+    const dateLabel = $("#todayDate");
+    const activities = $("#todayActivities");
+    const visual = $("#todayVisual");
+    if (!dateLabel || !activities) return;
 
-    if (!filteredDays.length) {
-      timelineContainer.innerHTML =
-        "<p>Aucune journée prévue pour cette destination.</p>";
+    dateLabel.textContent = formatFullDate(todayISO);
+
+    const day = data.days.find((item) => item.date === todayISO);
+
+    if (day) {
+      const transport = renderTransport(day.transportId || day.date);
+      activities.innerHTML = `
+        <p class="today-location">${escapeHTML(day.place)} · ${escapeHTML(day.title)}</p>
+        ${day.text ? `<p class="today-intro">${escapeHTML(day.text)}</p>` : ""}
+        ${transport}
+        ${renderActivities(day.activities)}
+      `;
+      if (visual) {
+        visual.className = `today-visual destination-${day.place === "Busan" ? "busan" : day.place === "Gyeongju" ? "gyeongju" : "seoul"}`;
+        visual.setAttribute("aria-label", `Paysage de ${day.place}`);
+      }
       return;
     }
 
-    timelineContainer.innerHTML = filteredDays.map((day) => `
-      <article
-        class="day${day.fixed ? " day-fixed" : ""}"
-        data-day-type="${escapeHTML(day.type || "explore")}"
+    const firstDay = data.days[0];
+    const lastDay = data.days[data.days.length - 1];
+
+    if (todayISO < firstDay.date) {
+      activities.innerHTML = `
+        <p class="today-location">Le voyage approche</p>
+        <p class="today-intro">Le départ est prévu le ${escapeHTML(formatFullDate(firstDay.date))}.</p>
+        <a class="text-link" href="#planning">Voir le planning complet ↗</a>
+      `;
+      if (visual) visual.className = "today-visual destination-seoul";
+    } else {
+      activities.innerHTML = `
+        <p class="today-location">Voyage terminé</p>
+        <p class="today-intro">Notre voyage en Corée s'est terminé le ${escapeHTML(formatFullDate(lastDay.date))}.</p>
+      `;
+      if (visual) visual.className = "today-visual destination-seoul";
+    }
+  }
+
+  const filtersContainer = $("#dayFilters");
+  const timelineContainer = $("#timeline");
+  const places = ["Tous", ...new Set(data.days.map((day) => day.place))];
+  let selectedPlace = "Tous";
+
+  function renderFilters() {
+    if (!filtersContainer) return;
+    filtersContainer.innerHTML = places.map((place, index) => `
+      <button type="button"
+        class="filter${index === 0 ? " active" : ""}"
+        data-place="${escapeHTML(place)}"
+        aria-pressed="${index === 0}">
+        ${escapeHTML(place)}
+      </button>
+    `).join("");
+  }
+
+  function renderDays() {
+    if (!timelineContainer) return;
+
+    const filtered = data.days.filter((day) =>
+      selectedPlace === "Tous" || day.place === selectedPlace
+    );
+
+    timelineContainer.innerHTML = filtered.map((day) => `
+      <article class="day${day.fixed ? " day-fixed" : ""}${day.date === todayISO ? " is-today" : ""}"
         id="day-${escapeHTML(day.date)}"
-      >
+        data-day-type="${escapeHTML(day.type || "explore")}">
         <div class="day-date">
-          <time datetime="${escapeHTML(day.date)}">
-            ${escapeHTML(day.label || formatDate(day.date))}
-          </time>
-          <br>
+          <time datetime="${escapeHTML(day.date)}">${escapeHTML(day.label || formatDate(day.date))}</time>
           <small>${escapeHTML(day.place)}</small>
         </div>
-
         <div class="day-content">
           <div class="day-heading">
             <h3>${escapeHTML(day.title)}</h3>
-            ${day.fixed
-              ? '<span class="day-tag">Date clé</span>'
-              : ""}
+            ${day.date === todayISO ? '<span class="day-tag">Aujourd’hui</span>' : ""}
+            ${day.fixed && day.date !== todayISO ? '<span class="day-tag">Date clé</span>' : ""}
           </div>
-
-          <p class="day-intro">${escapeHTML(day.text)}</p>
-
-          ${renderTransport(day.transportId)}
-
-          <details class="day-details" open>
+          <p class="day-intro">${escapeHTML(day.text || "")}</p>
+          ${renderTransport(day.transportId || day.date)}
+          <details class="day-details" ${day.date === todayISO ? "open" : ""}>
             <summary>
               Programme détaillé
               <span>${Array.isArray(day.activities) ? day.activities.length : 0} étapes</span>
             </summary>
-
             ${renderActivities(day.activities)}
           </details>
         </div>
@@ -240,214 +235,104 @@
 
   function selectPlace(place) {
     selectedPlace = places.includes(place) ? place : "Tous";
-
-    $$(".filter", filtersContainer).forEach((button) => {
-      const isActive = button.dataset.place === selectedPlace;
-      button.classList.toggle("active", isActive);
-      button.setAttribute("aria-pressed", String(isActive));
+    $$(".filter", filtersContainer || document).forEach((button) => {
+      const active = button.dataset.place === selectedPlace;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", String(active));
     });
-
     renderDays();
   }
 
-  filtersContainer.addEventListener("click", (event) => {
-    const button = event.target.closest(".filter");
-    if (!button || !filtersContainer.contains(button)) return;
-    selectPlace(button.dataset.place);
-  });
-
-  renderDays();
-
-  // -----------------------------------------
-  // 3. CARTE SCHÉMATIQUE DYNAMIQUE
-  // -----------------------------------------
-
-  const mapLine = $(".map-line");
-  const mapLabels = $(".map-labels");
-
-  if (mapLine && mapLabels) {
-    mapLine.innerHTML = data.route.map((step, index) => `
-      ${index > 0 ? "<i></i>" : ""}
-      <div class="map-dot${index === 0 ? " active" : ""}">
-        ${escapeHTML(step.number)}
-      </div>
-    `).join("");
-
-    mapLabels.innerHTML = data.route.map((step) => `
-      <div>
-        ${escapeHTML(step.city.toUpperCase())}
-        <small>${escapeHTML(step.dates)}</small>
-      </div>
-    `).join("");
+  if (filtersContainer) {
+    filtersContainer.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-place]");
+      if (button) selectPlace(button.dataset.place);
+    });
   }
 
-  // -----------------------------------------
-  // 4. HÉBERGEMENTS
-  // -----------------------------------------
+  function renderAccommodations() {
+    const container = $("#accommodationCards");
+    if (!container) return;
 
-  const accommodationContainer = $("#accommodationCards");
-
-  if (accommodationContainer && Array.isArray(data.accommodations)) {
-    accommodationContainer.innerHTML = data.accommodations.map((stay) => `
+    container.innerHTML = (data.accommodations || []).map((stay) => `
       <article class="info-card">
-        <p class="eyebrow">${escapeHTML(stay.city)}</p>
-        <h3>${escapeHTML(stay.name || "À confirmer")}</h3>
-        ${stay.area ? `<p>${escapeHTML(stay.area)}</p>` : ""}
+        <p class="info-label">${escapeHTML(stay.city)}${stay.area ? ` · ${escapeHTML(stay.area)}` : ""}</p>
+        <h4>${escapeHTML(stay.name || "Hébergement à confirmer")}</h4>
         ${stay.room ? `<p>${escapeHTML(stay.room)}</p>` : ""}
-        <p>${escapeHTML(stay.notes)}</p>
-        <span class="status">
-          ${stay.status === "known" ? "Information enregistrée" : "À compléter"}
-        </span>
+        ${stay.startDate && stay.endDate
+          ? `<p>${escapeHTML(formatDate(stay.startDate))} – ${escapeHTML(formatDate(stay.endDate))}</p>`
+          : ""}
+        ${stay.address ? `<p>${escapeHTML(stay.address)}</p>` : ""}
+        ${stay.notes ? `<p>${escapeHTML(stay.notes)}</p>` : ""}
+        ${stay.mapsUrl
+          ? `<p><a class="text-link" href="${escapeHTML(stay.mapsUrl)}" target="_blank" rel="noopener noreferrer">Localiser sur Naver Maps ↗</a></p>`
+          : ""}
       </article>
     `).join("");
   }
 
-  // -----------------------------------------
-  // 5. ÉVÉNEMENTS IMPORTANTS
-  // -----------------------------------------
+  function renderFlights() {
+    const container = $("#flightCards");
+    if (!container || !data.trip) return;
 
-  const eventContainer = $("#eventCards");
+    const arrival = data.trip.arrival;
+    const departure = data.trip.departure;
 
-  if (eventContainer && Array.isArray(data.importantEvents)) {
-    eventContainer.innerHTML = data.importantEvents.map((item) => `
+    container.innerHTML = `
       <article class="info-card">
-        <p class="eyebrow">
-          ${escapeHTML(formatDate(item.date, { year: "numeric" }))}
-          · ${escapeHTML(item.city)}
-        </p>
-        <h3>${escapeHTML(item.title)}</h3>
-        <p>${escapeHTML(item.description)}</p>
+        <p class="info-label">ARRIVÉE</p>
+        <h4>${escapeHTML(arrival.airport)} · ${escapeHTML(arrival.code)}</h4>
+        <p>${escapeHTML(formatFullDate(arrival.date))} à ${escapeHTML(arrival.time)}</p>
       </article>
-    `).join("");
-  }
-
-  // -----------------------------------------
-  // 6. PRÉFÉRENCES DE VOYAGE
-  // -----------------------------------------
-
-  const preferenceContainer = $("#preferenceList");
-
-  if (preferenceContainer && Array.isArray(data.preferences)) {
-    const sortedPreferences = [...data.preferences].sort(
-      (a, b) => b.priority - a.priority
-    );
-
-    preferenceContainer.innerHTML = sortedPreferences.map((item) => `
-      <div class="preference-item">
-        <span>${escapeHTML(item.label)}</span>
-        <span class="preference-score" aria-label="Priorité ${item.priority} sur 5">
-          ${"●".repeat(item.priority)}${"○".repeat(5 - item.priority)}
-        </span>
-      </div>
-    `).join("");
-  }
-
-  // -----------------------------------------
-  // 7. RÉSUMÉ DU VOYAGE
-  // -----------------------------------------
-
-  const tripSummary = $("#tripSummary");
-
-  if (tripSummary && data.trip) {
-    tripSummary.innerHTML = `
-      <p>
-        <strong>Dates :</strong>
-        ${escapeHTML(formatDate(data.trip.startDate, { year: "numeric" }))}
-        – ${escapeHTML(formatDate(data.trip.endDate, { year: "numeric" }))}
-      </p>
-      <p>
-        <strong>Arrivée :</strong>
-        ${escapeHTML(data.trip.arrival.airport)}
-        (${escapeHTML(data.trip.arrival.code)}),
-        ${escapeHTML(data.trip.arrival.time)}
-      </p>
-      <p>
-        <strong>Retour :</strong>
-        ${escapeHTML(data.trip.departure.airport)}
-        (${escapeHTML(data.trip.departure.code)}),
-        ${escapeHTML(data.trip.departure.time)}
-      </p>
-      <p>${escapeHTML(data.trip.groupDetails)}</p>
+      <article class="info-card">
+        <p class="info-label">RETOUR</p>
+        <h4>${escapeHTML(departure.airport)} · ${escapeHTML(departure.code)}</h4>
+        <p>${escapeHTML(formatFullDate(departure.date))} à ${escapeHTML(departure.time)}</p>
+      </article>
     `;
   }
 
-  // -----------------------------------------
-  // 8. NAVIGATION ACTIVE
-  // -----------------------------------------
+  function setupNavigation() {
+    const links = $$(".nav a, .mobile-nav a");
+    const targets = [
+      "#home", "#today", "#planning", "#map",
+      "#seoul", "#busan", "#gyeongju", "#infos"
+    ].map((hash) => ({ hash, element: $(hash) })).filter((item) => item.element);
 
-  const navigationLinks = $$(".nav a, .mobile-nav a");
-
-  function setActiveNavigation(hash) {
-    navigationLinks.forEach((link) => {
-      const isActive = link.getAttribute("href") === hash;
-      link.classList.toggle("is-active", isActive);
-
-      if (isActive) {
-        link.setAttribute("aria-current", "location");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
-  }
-
-  navigationLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      const hash = link.getAttribute("href");
-      setActiveNavigation(hash);
-
-      if (hash === "#planning") {
-        selectPlace(selectedPlace);
-      }
-    });
-  });
-
-  const hero = $(".hero");
-  const navigationTargets = [
-    { hash: "#home", element: hero },
-    { hash: "#planning", element: $("#planning") },
-    { hash: "#map", element: $("#map") },
-    { hash: "#seoul", element: $("#seoul") },
-    { hash: "#busan", element: $("#busan") },
-    { hash: "#gyeongju", element: $("#gyeongju") },
-    { hash: "#infos", element: $("#infos") }
-  ].filter((item) => item.element);
-
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver((entries) => {
-      const visibleEntries = entries
-        .filter((entry) => entry.isIntersecting)
-        .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
-
-      if (!visibleEntries.length) return;
-
-      const currentElement = visibleEntries[0].target;
-      const current = navigationTargets.find(
-        (item) => item.element === currentElement
-      );
-
-      if (current) setActiveNavigation(current.hash);
-    }, {
-      rootMargin: "-18% 0px -58% 0px",
-      threshold: [0, 0.15, 0.35, 0.6]
-    });
-
-    navigationTargets.forEach(({ element }) => observer.observe(element));
-  } else {
-    window.addEventListener("scroll", () => {
-      const marker = window.scrollY + window.innerHeight * 0.3;
-      let current = navigationTargets[0];
-
-      navigationTargets.forEach((item) => {
-        if (item.element.getBoundingClientRect().top + window.scrollY <= marker) {
-          current = item;
-        }
+    function setActive(hash) {
+      links.forEach((link) => {
+        const active = link.getAttribute("href") === hash;
+        link.classList.toggle("is-active", active);
+        if (active) link.setAttribute("aria-current", "location");
+        else link.removeAttribute("aria-current");
       });
+    }
 
-      if (current) setActiveNavigation(current.hash);
-    }, { passive: true });
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (!visible) return;
+        const target = targets.find((item) => item.element === visible.target);
+        if (target) setActive(target.hash);
+      }, { rootMargin: "-18% 0px -58% 0px", threshold: [0, 0.2, 0.45] });
+
+      targets.forEach(({ element }) => observer.observe(element));
+    }
+
+    links.forEach((link) => link.addEventListener("click", () => {
+      setActive(link.getAttribute("href"));
+    }));
   }
 
-  setActiveNavigation("#home");
+  renderRoute();
+  renderToday();
+  renderFilters();
+  renderDays();
+  renderAccommodations();
+  renderFlights();
+  setupNavigation();
 
-  console.info("Korea 2026 : planning détaillé initialisé.");
+  console.info("Korea 2026 : interface initialisée.");
 })();
