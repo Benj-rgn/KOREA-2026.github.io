@@ -1235,10 +1235,10 @@ section[id] {
     gap: 26px;
   }
 
-  .today-visual {
-    min-height: 280px;
-    grid-row: 1;
-  }
+   .today-visual {
+     min-height: 280px;
+     grid-row: auto;
+   }
 
   .today-date {
     margin-bottom: 22px;
