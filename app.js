@@ -220,7 +220,7 @@
       `;
 
       if (visual) {
-        const destination = getDestinationClass(day.place);
+        const destination = getDestinationClass(day.place, day.date);
         visual.className = `today-visual ${destination}`;
         visual.setAttribute("aria-label", `Paysage de ${day.place}`);
       }
@@ -249,17 +249,21 @@
       `;
     }
 
-    if (visual) {
-      visual.className = "today-visual destination-seoul";
-      visual.setAttribute("aria-label", "Paysage de Séoul");
-    }
+if (visual) {
+  visual.className = "today-visual destination-waiting";
+  visual.setAttribute(
+    "aria-label",
+    "Avion en attente du départ pour la Corée"
+  );
+}
   }
 
-  function getDestinationClass(place) {
-    if (place === "Busan") return "destination-busan";
-    if (place === "Gyeongju") return "destination-gyeongju";
-    return "destination-seoul";
-  }
+  function getDestinationClass(place, date) {
+  if (place === "Busan") return "destination-busan";
+  if (place === "Gyeongju") return "destination-gyeongju";
+  if (date >= "2026-10-30") return "destination-seoul-return";
+  return "destination-seoul-start";
+}
 
   // =========================================================
   // 7. PLANNING COMPLET ET FILTRES
