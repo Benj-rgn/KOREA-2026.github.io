@@ -136,7 +136,7 @@ window.KOREA_DATA = {
       mapsUrl: "https://map.naver.com/p/search/Sunset%20Hotel%20Busan",
       status: "known",
       notes: "Séjour du 26 au 28 octobre, dans le quartier de Haeundae."
-    }
+    },
 
     {
       id: "gyeongju-hanok",
