@@ -22,7 +22,6 @@
     return;
   }
 
-  // Échappe le texte avant de l'insérer dans le HTML.
   function escapeHTML(value) {
     return String(value ?? "").replace(/[&<>"']/g, (character) => {
       const entities = {
@@ -32,7 +31,6 @@
         '"': "&quot;",
         "'": "&#39;"
       };
-
       return entities[character];
     });
   }
@@ -41,13 +39,26 @@
     if (!dateString) return "";
 
     const date = new Date(`${dateString}T12:00:00`);
-
     if (Number.isNaN(date.getTime())) return dateString;
 
     return new Intl.DateTimeFormat("fr-FR", {
       day: "numeric",
       month: "short",
       ...options
+    }).format(date);
+  }
+
+  function formatFullDate(dateString) {
+    if (!dateString) return "";
+
+    const date = new Date(`${dateString}T12:00:00`);
+    if (Number.isNaN(date.getTime())) return dateString;
+
+    return new Intl.DateTimeFormat("fr-FR", {
+      weekday: "long",
+      day: "numeric",
+      month: "long",
+      year: "numeric"
     }).format(date);
   }
 
@@ -79,7 +90,7 @@
   }).join("");
 
   // -----------------------------------------
-  // 2. FILTRES ET PLANNING
+  // 2. FILTRES ET PLANNING DÉTAILLÉ
   // -----------------------------------------
 
   const places = [
@@ -100,6 +111,83 @@
     </button>
   `).join("");
 
+  function renderTransport(transportId) {
+    if (!transportId || !Array.isArray(data.transport)) return "";
+
+    const train = data.transport.find(
+      (item) => item.date === transportId
+    );
+
+    if (!train) return "";
+
+    return `
+      <section class="transport-card" aria-label="Informations du train">
+        <p class="transport-eyebrow">TRAJET CONFIRMÉ · ${escapeHTML(train.train)}</p>
+
+        <div class="transport-route">
+          <div class="transport-station">
+            <strong>${escapeHTML(train.departure)}</strong>
+            <span>${escapeHTML(train.from)}</span>
+          </div>
+
+          <div class="transport-middle">
+            <span>${escapeHTML(train.duration)}</span>
+            <span class="transport-line" aria-hidden="true"></span>
+          </div>
+
+          <div class="transport-station">
+            <strong>${escapeHTML(train.arrival)}</strong>
+            <span>${escapeHTML(train.to)}</span>
+          </div>
+        </div>
+
+        <div class="transport-details">
+          <p><strong>Train</strong><span>${escapeHTML(train.train)}</span></p>
+          <p><strong>Voiture</strong><span>${escapeHTML(train.carriage)}</span></p>
+          <p><strong>Sièges</strong><span>${escapeHTML(train.seats.join(", "))}</span></p>
+          <p><strong>Passagers</strong><span>${escapeHTML(train.passengers)} billets</span></p>
+          <p><strong>Prix par billet</strong><span>${escapeHTML(train.pricePerPerson)}</span></p>
+          <p><strong>Total</strong><span>${escapeHTML(train.totalPrice)}</span></p>
+        </div>
+      </section>
+    `;
+  }
+
+  function renderActivities(activities) {
+    if (!Array.isArray(activities) || activities.length === 0) {
+      return `
+        <div class="activities-empty">
+          <p>Les activités de cette journée restent à définir.</p>
+        </div>
+      `;
+    }
+
+    return `
+      <div class="activity-list">
+        ${activities.map((activity, index) => `
+          <article class="activity-item">
+            <div class="activity-marker" aria-hidden="true">
+              ${String(index + 1).padStart(2, "0")}
+            </div>
+
+            <div class="activity-body">
+              <div class="activity-heading">
+                <h4>${escapeHTML(activity.title)}</h4>
+                ${activity.time
+                  ? `<span class="activity-time">${escapeHTML(activity.time)}</span>`
+                  : ""}
+              </div>
+
+              ${activity.detail
+                ? `<p>${escapeHTML(activity.detail)}</p>`
+                : ""}
+            </div>
+          </article>
+        `).join("")}
+      </div>
+    `;
+  }
+
   function renderDays() {
     const filteredDays = data.days.filter((day) =>
       selectedPlace === "Tous" || day.place === selectedPlace
@@ -115,6 +203,7 @@
       <article
         class="day${day.fixed ? " day-fixed" : ""}"
         data-day-type="${escapeHTML(day.type || "explore")}"
+        id="day-${escapeHTML(day.date)}"
       >
         <div class="day-date">
           <time datetime="${escapeHTML(day.date)}">
@@ -131,7 +220,19 @@
               ? '<span class="day-tag">Date clé</span>'
               : ""}
           </div>
-          <p>${escapeHTML(day.text)}</p>
+
+          <p class="day-intro">${escapeHTML(day.text)}</p>
+
+          ${renderTransport(day.transportId)}
+
+          <details class="day-details" open>
+            <summary>
+              Programme détaillé
+              <span>${Array.isArray(day.activities) ? day.activities.length : 0} étapes</span>
+            </summary>
+
+            ${renderActivities(day.activities)}
+          </details>
         </div>
       </article>
     `).join("");
@@ -142,7 +243,6 @@
 
     $$(".filter", filtersContainer).forEach((button) => {
       const isActive = button.dataset.place === selectedPlace;
-
       button.classList.toggle("active", isActive);
       button.setAttribute("aria-pressed", String(isActive));
     });
@@ -152,9 +252,7 @@
 
   filtersContainer.addEventListener("click", (event) => {
     const button = event.target.closest(".filter");
-
     if (!button || !filtersContainer.contains(button)) return;
-
     selectPlace(button.dataset.place);
   });
 
@@ -185,7 +283,6 @@
 
   // -----------------------------------------
   // 4. HÉBERGEMENTS
-  // Conteneur facultatif : #accommodationCards
   // -----------------------------------------
 
   const accommodationContainer = $("#accommodationCards");
@@ -207,7 +304,6 @@
 
   // -----------------------------------------
   // 5. ÉVÉNEMENTS IMPORTANTS
-  // Conteneur facultatif : #eventCards
   // -----------------------------------------
 
   const eventContainer = $("#eventCards");
@@ -227,7 +323,6 @@
 
   // -----------------------------------------
   // 6. PRÉFÉRENCES DE VOYAGE
-  // Conteneur facultatif : #preferenceList
   // -----------------------------------------
 
   const preferenceContainer = $("#preferenceList");
@@ -249,7 +344,6 @@
 
   // -----------------------------------------
   // 7. RÉSUMÉ DU VOYAGE
-  // Conteneur facultatif : #tripSummary
   // -----------------------------------------
 
   const tripSummary = $("#tripSummary");
@@ -279,7 +373,6 @@
 
   // -----------------------------------------
   // 8. NAVIGATION ACTIVE
-  // Home n'est actif que lorsque le hero est visible.
   // -----------------------------------------
 
   const navigationLinks = $$(".nav a, .mobile-nav a");
@@ -287,7 +380,6 @@
   function setActiveNavigation(hash) {
     navigationLinks.forEach((link) => {
       const isActive = link.getAttribute("href") === hash;
-
       link.classList.toggle("is-active", isActive);
 
       if (isActive) {
@@ -303,7 +395,6 @@
       const hash = link.getAttribute("href");
       setActiveNavigation(hash);
 
-      // Le filtre de planning reste indépendant de la navigation.
       if (hash === "#planning") {
         selectPlace(selectedPlace);
       }
@@ -342,7 +433,6 @@
 
     navigationTargets.forEach(({ element }) => observer.observe(element));
   } else {
-    // Repli pour les navigateurs sans IntersectionObserver.
     window.addEventListener("scroll", () => {
       const marker = window.scrollY + window.innerHeight * 0.3;
       let current = navigationTargets[0];
@@ -357,8 +447,7 @@
     }, { passive: true });
   }
 
-  // Au chargement, Home est actif par défaut.
   setActiveNavigation("#home");
 
-  console.info("Korea 2026 : application initialisée.");
+  console.info("Korea 2026 : planning détaillé initialisé.");
 })();
