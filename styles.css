@@ -278,7 +278,6 @@ section[id] {
   letter-spacing: 0.25em;
 }
 
-
 /* -------------------- Route timeline -------------------- */
 
 .map-section {
@@ -310,7 +309,6 @@ section[id] {
   padding: 22px 4%;
 }
 
-/* Ligne reliant les marqueurs */
 .route-timeline::before {
   position: absolute;
   top: 28px;
@@ -346,7 +344,6 @@ section[id] {
   transition: background 180ms ease, box-shadow 180ms ease;
 }
 
-/* Numéro sous le marqueur */
 .route-stop-number {
   display: block;
   margin-bottom: 3px;
@@ -401,7 +398,6 @@ section[id] {
   display: none;
 }
 
-/* Tablettes et téléphones : les quatre étapes tiennent dans le cadre */
 @media (max-width: 760px) {
   .map-section {
     padding-right: var(--gutter);
@@ -473,7 +469,6 @@ section[id] {
     font-size: 7px;
   }
 }
-
 
 /* -------------------- Today's program -------------------- */
 
@@ -615,6 +610,20 @@ section[id] {
   margin-bottom: 0;
   font-size: 13px;
   line-height: 1.7;
+}
+
+/* Lien Kakao Map sous une activité */
+
+.activity-body p.activity-map-link {
+  margin-top: 9px;
+  margin-bottom: 0;
+}
+
+.activity-map-link .text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 3px 0;
 }
 
 .activities-empty {
@@ -857,49 +866,117 @@ section[id] {
   line-height: 1.8;
 }
 
+/* Bouton « Programme détaillé » */
+
 .day-details {
   margin-top: 20px;
   border-top: 1px solid var(--line);
 }
 
 .day-details summary {
+  position: relative;
   display: flex;
+  min-height: 54px;
   align-items: center;
-  gap: 14px;
-  padding: 16px 0;
+  gap: 12px;
+  padding: 13px 16px 13px 18px;
+  border: 1px solid rgb(199 110 67 / 35%);
+  border-left: 4px solid var(--orange);
+  border-radius: var(--radius);
+  background: rgb(240 223 209 / 42%);
   color: var(--brown);
   cursor: pointer;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   list-style: none;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .day-details summary::-webkit-details-marker {
   display: none;
 }
 
+.day-details summary::before {
+  display: inline-flex;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--orange);
+  border-radius: 50%;
+  color: var(--orange);
+  content: "＋";
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.day-details[open] summary::before {
+  background: var(--orange);
+  color: var(--white);
+  content: "−";
+}
+
+.day-details summary:hover {
+  border-color: var(--orange);
+  background: rgb(240 223 209 / 72%);
+}
+
+.day-details summary:active {
+  background: rgb(240 223 209 / 90%);
+  transform: scale(0.995);
+}
+
+.day-details summary:focus-visible {
+  outline: 2px solid var(--orange);
+  outline-offset: 4px;
+}
+
+.day-details[open] summary {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.day-details summary .day-details-label {
+  min-width: 0;
+  color: var(--brown);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.day-details summary .day-details-count {
+  margin-left: auto;
+  color: var(--brown-light);
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
 .day-details summary::after {
   width: 7px;
   height: 7px;
-  flex-shrink: 0;
-  margin-left: auto;
-  border-right: 1px solid currentColor;
-  border-bottom: 1px solid currentColor;
+  flex: 0 0 7px;
+  margin-left: 3px;
+  border-right: 1.5px solid var(--orange);
+  border-bottom: 1.5px solid var(--orange);
   content: "";
-  transform: rotate(45deg);
+  transform: rotate(45deg) translateY(-2px);
   transition: transform 180ms ease;
 }
 
 .day-details[open] summary::after {
-  transform: rotate(225deg);
+  transform: rotate(225deg) translate(-1px, -1px);
 }
-
-.day-details summary span {
-  color: var(--muted);
-  font-size: 11px;
-  font-weight: 400;
-}
-
 
 /* -------------------- Practical information -------------------- */
 
@@ -1161,10 +1238,10 @@ section[id] {
     gap: 26px;
   }
 
-   .today-visual {
-     min-height: 280px;
-     grid-row: auto;
-   }
+  .today-visual {
+    min-height: 280px;
+    grid-row: auto;
+  }
 
   .today-date {
     margin-bottom: 22px;
@@ -1224,6 +1301,20 @@ section[id] {
 
   .day-details {
     margin-top: 18px;
+  }
+
+  .day-details summary {
+    min-height: 52px;
+    gap: 9px;
+    padding: 12px;
+  }
+
+  .day-details summary .day-details-label {
+    font-size: 11px;
+  }
+
+  .day-details summary .day-details-count {
+    font-size: 10px;
   }
 
   .destination-section {
@@ -1327,8 +1418,8 @@ section[id] {
   }
 }
 
+/* -------------------- Route timeline mobile correction -------------------- */
 
-/* Correctif mobile — timeline complète */
 @media (max-width: 760px) {
   .route-map {
     width: 100%;
@@ -1385,4 +1476,3 @@ section[id] {
     display: none;
   }
 }
-
