@@ -173,7 +173,7 @@ window.KOREA_DATA = {
       date: "2026-10-31",
       city: "Séoul",
       title: "Mariage de ton frère",
-      description: "Journée réservée au mariage et aux célébrations familiales."
+      description: "Cérémonie de 15:00 à 18:00, puis réception et célébration jusqu'à 22:00. Adresse : 73 Seocho-daero 64-gil, Seocho District, Seoul, Corée du Sud."
     }
   ],
 
@@ -447,8 +447,15 @@ window.KOREA_DATA = {
       fixed: true,
       activities: [
         {
-          title: "Mariage familial",
-          detail: "Journée réservée au mariage de ton frère."
+          title: "Cérémonie de mariage",
+          time: "15:00–18:00",
+          detail: "73 Seocho-daero 64-gil, Seocho District, Seoul, Corée du Sud.",
+          mapUrl: "https://map.kakao.com/link/search/73%20Seocho-daero%2064-gil%2C%20Seocho%20District%2C%20Seoul"
+        },
+        {
+          title: "Réception et célébration",
+          time: "Jusqu'à 22:00",
+          detail: "Suite des célébrations du mariage."
         }
       ]
     },
