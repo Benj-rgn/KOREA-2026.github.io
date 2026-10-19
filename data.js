@@ -77,7 +77,7 @@ window.KOREA_DATA = {
       startDate: "2026-10-24",
       endDate: "2026-10-26",
       dates: "24–26 OCT",
-      description: "Arrivée en Corée, moments en famille et anniversaire de Papa.",
+      description: "Arrivée en Corée, moments en famille et anniversaire de Papa."
     },
     {
       id: "busan",
@@ -87,7 +87,7 @@ window.KOREA_DATA = {
       startDate: "2026-10-26",
       endDate: "2026-10-28",
       dates: "26–28 OCT",
-      description: "Découvertes côtières, gastronomie et paysages maritimes.",
+      description: "Découvertes côtières, gastronomie et paysages maritimes."
     },
     {
       id: "gyeongju",
@@ -97,7 +97,7 @@ window.KOREA_DATA = {
       startDate: "2026-10-28",
       endDate: "2026-10-30",
       dates: "28–30 OCT",
-      description: "Patrimoine historique, nature et découverte à vélo.",
+      description: "Patrimoine historique, nature et découverte à vélo."
     },
     {
       id: "seoul-return",
@@ -107,10 +107,9 @@ window.KOREA_DATA = {
       startDate: "2026-10-30",
       endDate: "2026-11-04",
       dates: "30 OCT–4 NOV",
-      description: "Retour à Séoul, mariage familial et dernières découvertes.",
+      description: "Retour à Séoul, mariage familial et dernières découvertes."
     }
   ],
-
 
   accommodations: [
     {
@@ -121,7 +120,7 @@ window.KOREA_DATA = {
       address: "153 Dosan-daero, Gangnam-gu, Seoul, Corée du Sud",
       startDate: "2026-10-24",
       endDate: "2026-10-26",
-      mapsUrl: "https://map.naver.com/p/search/Hotel%20Anteroom%20Seoul",
+      mapsUrl: "https://map.kakao.com/link/search/Hotel%20Anteroom%20Seoul?utm_source=chatgpt.com",
       status: "known",
       notes: "Premier séjour à Séoul : du 24 au 26 octobre 2026 (2 nuits)."
     },
@@ -133,7 +132,7 @@ window.KOREA_DATA = {
       address: "46, Gunam-ro, Haeundae-gu, 48094 Busan, Corée du Sud",
       startDate: "2026-10-26",
       endDate: "2026-10-28",
-      mapsUrl: "https://map.naver.com/p/search/Sunset%20Hotel%20Busan",
+      mapsUrl: "https://map.kakao.com/link/search/Sunset%20Hotel%20Busan?utm_source=chatgpt.com",
       status: "known",
       notes: "Séjour du 26 au 28 octobre 2026 (2 nuits)."
     },
@@ -145,7 +144,7 @@ window.KOREA_DATA = {
       address: "Gyeongju-si, Gyeongsangbuk-do 38170, Corée du Sud",
       startDate: "2026-10-28",
       endDate: "2026-10-30",
-      mapsUrl: "https://map.naver.com/p/search/Hanok%20Stay%20Leafy%20Dalshimnal%20Gyeongju",
+      mapsUrl: "https://map.kakao.com/link/search/Leafy%20Dalshimnal%20Gyeongju?utm_source=chatgpt.com",
       status: "known",
       notes: "Séjour dans un hébergement traditionnel coréen du 28 au 30 octobre 2026 (2 nuits)."
     },
@@ -157,12 +156,11 @@ window.KOREA_DATA = {
       address: "153 Dosan-daero, Gangnam-gu, Seoul, Corée du Sud",
       startDate: "2026-10-30",
       endDate: "2026-11-04",
-      mapsUrl: "https://map.naver.com/p/search/Hotel%20Anteroom%20Seoul",
+      mapsUrl: "https://map.kakao.com/link/search/Hotel%20Anteroom%20Seoul?utm_source=chatgpt.com",
       status: "known",
       notes: "Second séjour à Séoul : du 30 octobre au 4 novembre 2026 (5 nuits)."
     }
   ],
-
 
   importantEvents: [
     {
@@ -204,8 +202,16 @@ window.KOREA_DATA = {
       type: "travel",
       fixed: true,
       activities: [
-        { title: "Arrivée à Incheon", time: "09:30", detail: "Arrivée à l'aéroport international d'Incheon (ICN)." },
-        { title: "Transfert et installation", detail: "Rejoindre l'hébergement et prendre le temps de récupérer après le vol." }
+        {
+          title: "Arrivée à Incheon",
+          time: "09:30",
+          detail: "Arrivée à l'aéroport international d'Incheon (ICN).",
+          mapUrl: "https://map.kakao.com/link/search/Incheon%20International%20Airport"
+        },
+        {
+          title: "Transfert et installation",
+          detail: "Rejoindre l'hébergement et prendre le temps de récupérer après le vol."
+        }
       ]
     },
     {
@@ -217,7 +223,10 @@ window.KOREA_DATA = {
       type: "event",
       fixed: true,
       activities: [
-        { title: "Célébration familiale", detail: "Anniversaire de Papa. Journée réservée à la famille." }
+        {
+          title: "Célébration familiale",
+          detail: "Anniversaire de Papa. Journée réservée à la famille."
+        }
       ]
     },
     {
@@ -243,22 +252,26 @@ window.KOREA_DATA = {
         {
           title: "Haeundae Beach",
           time: "Après-midi",
-          detail: "Découvrir la plage de Haeundae et profiter du paysage côtier."
+          detail: "Découvrir la plage de Haeundae et profiter du paysage côtier.",
+          mapUrl: "https://map.kakao.com/link/search/Haeundae%20Beach%20Busan"
         },
         {
           title: "Dongbaek Park",
           time: "Après-midi",
-          detail: "Balade dans le parc côtier de Dongbaek."
+          detail: "Balade dans le parc côtier de Dongbaek.",
+          mapUrl: "https://map.kakao.com/link/search/Dongbaek%20Park%20Busan"
         },
         {
           title: "Jagalchi Market",
           time: "Soirée",
-          detail: "Explorer le marché aux poissons et découvrir la gastronomie locale."
+          detail: "Explorer le marché aux poissons et découvrir la gastronomie locale.",
+          mapUrl: "https://map.kakao.com/link/search/Jagalchi%20Market%20Busan"
         },
         {
           title: "Nampo-dong et BIFF Square",
           time: "Soirée",
-          detail: "Se promener dans les rues animées et profiter de l'ambiance du quartier."
+          detail: "Se promener dans les rues animées et profiter de l'ambiance du quartier.",
+          mapUrl: "https://map.kakao.com/link/search/BIFF%20Square%20Busan"
         },
         {
           title: "Nuit à Busan",
@@ -278,17 +291,20 @@ window.KOREA_DATA = {
         {
           title: "Haedong Yonggungsa",
           time: "Matin",
-          detail: "Visiter le temple en bord de mer et profiter de son cadre côtier."
+          detail: "Visiter le temple en bord de mer et profiter de son cadre côtier.",
+          mapUrl: "https://map.kakao.com/link/search/Haedong%20Yonggungsa%20Temple"
         },
         {
           title: "Sky Capsule : Mipo → Cheongsapo",
           time: "Fin de matinée",
-          detail: "Trajet panoramique en capsule le long de la côte."
+          detail: "Trajet panoramique en capsule le long de la côte.",
+          mapUrl: "https://map.kakao.com/link/search/Busan%20Haeundae%20Sky%20Capsule%20Mipo"
         },
         {
           title: "Gamcheon Culture Village",
           time: "Après-midi",
-          detail: "Explorer les ruelles, les maisons colorées et les points de vue du village."
+          detail: "Explorer les ruelles, les maisons colorées et les points de vue du village.",
+          mapUrl: "https://map.kakao.com/link/search/Gamcheon%20Culture%20Village%20Busan"
         },
         {
           title: "Soirée libre",
@@ -325,7 +341,8 @@ window.KOREA_DATA = {
         {
           title: "Installation au hanok",
           time: "Après l'arrivée",
-          detail: "Rejoindre Hanok Stay Leafy Dalshimnal, chambre Ondol, s'installer et profiter d'une fin de journée libre."
+          detail: "Rejoindre Hanok Stay Leafy Dalshimnal, chambre Ondol, s'installer et profiter d'une fin de journée libre.",
+          mapUrl: "https://map.kakao.com/link/search/Leafy%20Dalshimnal%20Gyeongju"
         }
       ]
     },
@@ -341,17 +358,20 @@ window.KOREA_DATA = {
         {
           title: "Daereungwon Tomb Complex",
           time: "Matin",
-          detail: "Commencer la boucle par le complexe de tumulus royaux."
+          detail: "Commencer la boucle par le complexe de tumulus royaux.",
+          mapUrl: "https://map.kakao.com/link/search/Daereungwon%20Tomb%20Complex%20Gyeongju"
         },
         {
           title: "Inwang-dong Ancient Tombs of Silla",
           time: "Matin",
-          detail: "Poursuivre la découverte des vestiges et des tombes anciennes de Silla."
+          detail: "Poursuivre la découverte des vestiges et des tombes anciennes de Silla.",
+          mapUrl: "https://map.kakao.com/link/search/Inwang-dong%20Ancient%20Tombs%20of%20Silla"
         },
         {
           title: "Cheomseongdae",
           time: "Fin de matinée",
-          detail: "Découvrir l'observatoire historique et ses environs."
+          detail: "Découvrir l'observatoire historique et ses environs.",
+          mapUrl: "https://map.kakao.com/link/search/Cheomseongdae%20Gyeongju"
         },
         {
           title: "Pause déjeuner et cafés",
@@ -361,22 +381,26 @@ window.KOREA_DATA = {
         {
           title: "Gyochon Traditional Village",
           time: "Après-midi",
-          detail: "Parcourir le village traditionnel et découvrir l'architecture locale."
+          detail: "Parcourir le village traditionnel et découvrir l'architecture locale.",
+          mapUrl: "https://map.kakao.com/link/search/Gyochon%20Traditional%20Village%20Gyeongju"
         },
         {
           title: "Woljeonggyo Bridge",
           time: "Après-midi",
-          detail: "Découvrir le pont traditionnel et les paysages autour de la rivière."
+          detail: "Découvrir le pont traditionnel et les paysages autour de la rivière.",
+          mapUrl: "https://map.kakao.com/link/search/Woljeonggyo%20Bridge%20Gyeongju"
         },
         {
           title: "Donggung Palace & Wolji",
           time: "Option en soirée",
-          detail: "Visite facultative si le timing et l'énergie du groupe le permettent."
+          detail: "Visite facultative si le timing et l'énergie du groupe le permettent.",
+          mapUrl: "https://map.kakao.com/link/search/Donggung%20Palace%20Wolji%20Gyeongju"
         },
         {
           title: "Acorn Caricature",
           time: "Option",
-          detail: "À intégrer uniquement si cela s'insère facilement dans le parcours."
+          detail: "À intégrer uniquement si cela s'insère facilement dans le parcours.",
+          mapUrl: "https://map.kakao.com/link/search/Acorn%20Caricature%20Gyeongju"
         }
       ]
     },
@@ -403,7 +427,8 @@ window.KOREA_DATA = {
         {
           title: "Transfert vers l'hébergement",
           time: "Après 11:24",
-          detail: "À l'arrivée à Séoul, rejoindre l'hébergement et déposer les bagages."
+          detail: "À l'arrivée à Séoul, rejoindre l'hébergement et déposer les bagages.",
+          mapUrl: "https://map.kakao.com/link/search/Hotel%20Anteroom%20Seoul"
         },
         {
           title: "Après-midi libre à Séoul",
@@ -421,7 +446,10 @@ window.KOREA_DATA = {
       type: "event",
       fixed: true,
       activities: [
-        { title: "Mariage familial", detail: "Journée réservée au mariage de ton frère." }
+        {
+          title: "Mariage familial",
+          detail: "Journée réservée au mariage de ton frère."
+        }
       ]
     },
     {
@@ -466,7 +494,8 @@ window.KOREA_DATA = {
         {
           title: "Vol retour depuis Incheon",
           time: "13:20",
-          detail: "Départ depuis l'aéroport international d'Incheon (ICN)."
+          detail: "Départ depuis l'aéroport international d'Incheon (ICN).",
+          mapUrl: "https://map.kakao.com/link/search/Incheon%20International%20Airport"
         }
       ]
     }
