@@ -312,51 +312,66 @@
       selectedPlace === "Tous" || day.place === selectedPlace
     );
 
-    timelineContainer.innerHTML = filteredDays.map((day) => `
-      <article
-        class="day${day.fixed ? " day-fixed" : ""}${day.date === todayISO ? " is-today" : ""}"
-        id="day-${escapeHTML(day.date)}"
-        data-day-type="${escapeHTML(day.type || "explore")}"
-      >
-        <div class="day-date">
-          <time datetime="${escapeHTML(day.date)}">
-            ${escapeHTML(day.label || formatDate(day.date))}
-          </time>
-          <small>${escapeHTML(day.place)}</small>
-        </div>
+    timelineContainer.innerHTML = filteredDays.map((day) => {
+      // Le bouton « Programme détaillé » ne doit pas apparaître
+      // pour les quatre dernières journées du voyage.
+      const hideDetailedProgram = [
+        "2026-11-01",
+        "2026-11-02",
+        "2026-11-03",
+        "2026-11-04"
+      ].includes(day.date);
 
-        <div class="day-content">
-          <div class="day-heading">
-            <h3>${escapeHTML(day.title)}</h3>
-
-            ${day.date === todayISO
-              ? '<span class="day-tag">Aujourd’hui</span>'
-              : ""}
-
-            ${day.fixed && day.date !== todayISO
-              ? '<span class="day-tag">Date clé</span>'
-              : ""}
+      return `
+        <article
+          class="day${day.fixed ? " day-fixed" : ""}${day.date === todayISO ? " is-today" : ""}"
+          id="day-${escapeHTML(day.date)}"
+          data-day-type="${escapeHTML(day.type || "explore")}"
+        >
+          <div class="day-date">
+            <time datetime="${escapeHTML(day.date)}">
+              ${escapeHTML(day.label || formatDate(day.date))}
+            </time>
+            <small>${escapeHTML(day.place)}</small>
           </div>
 
-          ${day.text
-            ? `<p class="day-intro">${escapeHTML(day.text)}</p>`
-            : ""}
+          <div class="day-content">
+            <div class="day-heading">
+              <h3>${escapeHTML(day.title)}</h3>
 
-          ${renderTransport(day.transportId || day.date)}
+              ${day.date === todayISO
+                ? '<span class="day-tag">Aujourd’hui</span>'
+                : ""}
 
-          <details class="day-details" ${day.date === todayISO ? "open" : ""}>
-            <summary>
-              <span class="day-details-label">Programme détaillé</span>
-              <span class="day-details-count">
-                ${Array.isArray(day.activities) ? day.activities.length : 0} étapes
-              </span>
-            </summary>
+              ${day.fixed && day.date !== todayISO
+                ? '<span class="day-tag">Date clé</span>'
+                : ""}
+            </div>
 
-            ${renderActivities(day.activities)}
-          </details>
-        </div>
-      </article>
-    `).join("");
+            ${day.text
+              ? `<p class="day-intro">${escapeHTML(day.text)}</p>`
+              : ""}
+
+            ${renderTransport(day.transportId || day.date)}
+
+            ${hideDetailedProgram
+              ? ""
+              : `
+                <details class="day-details" ${day.date === todayISO ? "open" : ""}>
+                  <summary>
+                    <span class="day-details-label">Programme détaillé</span>
+                    <span class="day-details-count">
+                      ${Array.isArray(day.activities) ? day.activities.length : 0} étapes
+                    </span>
+                  </summary>
+
+                  ${renderActivities(day.activities)}
+                </details>
+              `}
+          </div>
+        </article>
+      `;
+    }).join("");
   }
 
   function selectPlace(place) {
