@@ -181,6 +181,17 @@
               ${activity.detail
                 ? `<p>${escapeHTML(activity.detail)}</p>`
                 : ""}
+
+              ${activity.mapUrl
+                ? `<p class="activity-map-link">
+                    <a
+                      class="text-link"
+                      href="${escapeHTML(activity.mapUrl)}"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >Ouvrir dans Kakao Map ↗</a>
+                  </p>`
+                : ""}
             </div>
           </article>
         `).join("")}
@@ -231,15 +242,15 @@
     const firstDay = data.days[0];
     const lastDay = data.days[data.days.length - 1];
 
-  if (todayISO < firstDay.date) {
-  activitiesContainer.innerHTML = `
-    <p class="today-location">Le voyage approche</p>
-    <p class="today-intro">
-      Départ le vendredi 23 octobre 2026. Direction la Corée du Sud !
-    </p>
-    <a class="text-link" href="#planning">Voir le planning complet ↗</a>
-  `;
-  } else {
+    if (todayISO < firstDay.date) {
+      activitiesContainer.innerHTML = `
+        <p class="today-location">Le voyage approche</p>
+        <p class="today-intro">
+          Départ le vendredi 23 octobre 2026. Direction la Corée du Sud !
+        </p>
+        <a class="text-link" href="#planning">Voir le planning complet ↗</a>
+      `;
+    } else {
       activitiesContainer.innerHTML = `
         <p class="today-location">Voyage terminé</p>
         <p class="today-intro">
@@ -249,21 +260,21 @@
       `;
     }
 
-if (visual) {
-  visual.className = "today-visual destination-waiting";
-  visual.setAttribute(
-    "aria-label",
-    "Avion en attente du départ pour la Corée"
-  );
-}
+    if (visual) {
+      visual.className = "today-visual destination-waiting";
+      visual.setAttribute(
+        "aria-label",
+        "Avion en attente du départ pour la Corée"
+      );
+    }
   }
 
   function getDestinationClass(place, date) {
-  if (place === "Busan") return "destination-busan";
-  if (place === "Gyeongju") return "destination-gyeongju";
-  if (date >= "2026-10-30") return "destination-seoul-return";
-  return "destination-seoul-start";
-}
+    if (place === "Busan") return "destination-busan";
+    if (place === "Gyeongju") return "destination-gyeongju";
+    if (date >= "2026-10-30") return "destination-seoul-return";
+    return "destination-seoul-start";
+  }
 
   // =========================================================
   // 7. PLANNING COMPLET ET FILTRES
@@ -335,8 +346,8 @@ if (visual) {
 
           <details class="day-details" ${day.date === todayISO ? "open" : ""}>
             <summary>
-              Programme détaillé
-              <span>
+              <span class="day-details-label">Programme détaillé</span>
+              <span class="day-details-count">
                 ${Array.isArray(day.activities) ? day.activities.length : 0} étapes
               </span>
             </summary>
@@ -369,7 +380,7 @@ if (visual) {
     });
   }
 
-  // NOUVEAU : clic sur la timeline pour ouvrir le planning filtré
+  // Clic sur la timeline pour ouvrir le planning filtré
   const routeContainer = $("#routeTimeline");
 
   if (routeContainer) {
@@ -381,10 +392,8 @@ if (visual) {
 
       const place = link.dataset.routePlace;
 
-      // Active le filtre correspondant à l'étape choisie
       selectPlace(place);
 
-      // Ouvre la section du planning
       const planningSection = $("#planning");
 
       if (planningSection) {
@@ -394,7 +403,6 @@ if (visual) {
         });
       }
 
-      // Met à jour l'URL sans recharger la page
       if (window.location.hash !== "#planning") {
         window.history.replaceState(null, "", "#planning");
       }
@@ -433,7 +441,7 @@ if (visual) {
                 href="${escapeHTML(stay.mapsUrl)}"
                 target="_blank"
                 rel="noopener noreferrer"
-              >Localiser sur Naver Maps ↗</a>
+              >Ouvrir dans Kakao Map ↗</a>
             </p>`
           : ""}
       </article>
